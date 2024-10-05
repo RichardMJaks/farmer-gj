@@ -2,7 +2,11 @@
 
 importer="wav"
 type="AudioStreamWAV"
+<<<<<<< Updated upstream
 uid="uid://y8oahll6ll5s"
+=======
+uid="uid://fy88m4glk6bh"
+>>>>>>> Stashed changes
 path="res://.godot/imported/Throwstuffintotruck.wav-1638827f8d4a4c3b3b976e8d90bb2b3c.sample"
 
 [deps]

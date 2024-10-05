@@ -2,7 +2,11 @@
 
 importer="wav"
 type="AudioStreamWAV"
+<<<<<<< Updated upstream
 uid="uid://b0bldv46hdeir"
+=======
+uid="uid://bcahy35ohr4jw"
+>>>>>>> Stashed changes
 path="res://.godot/imported/Menuselectsound.wav-43080679ea9114fa1fa27a4ff5cd183d.sample"
 
 [deps]
