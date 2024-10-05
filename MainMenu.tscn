@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://cermtvnnmwb7f"]
+
+[ext_resource type="Script" path="res://MainMenu.gd" id="1_df1sm"]
+[ext_resource type="Texture2D" uid="uid://d1maeur3rseo2" path="res://Screenshot 2024-10-05 224531.png" id="2_bsx1r"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n40ar"]
+texture = ExtResource("2_bsx1r")
+modulate_color = Color(0.389287, 0.389287, 0.389287, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3vw5s"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nyump"]
+bg_color = Color(0.509277, 0.65375, 0.375532, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+shadow_offset = Vector2(0, 3.41)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 191.0
+offset_bottom = 286.0
+script = ExtResource("1_df1sm")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(648, 1152)
+layout_mode = 0
+offset_right = 644.0
+offset_bottom = 1105.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_n40ar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 648.0
+offset_bottom = 1152.0
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 70
+theme_override_styles/hover = SubResource("StyleBoxFlat_3vw5s")
+theme_override_styles/normal = SubResource("StyleBoxFlat_nyump")
+text = "PLAY
+"
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "OPTIONS"
+
+[node name="CreditsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "CREDITS"
+
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
