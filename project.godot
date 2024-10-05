@@ -24,6 +24,16 @@ window/size/viewport_height=1152
 
 enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://Art/": "yellow",
+"res://Resources/": "purple",
+"res://Scenes/": "green",
+"res://Sound/": "blue",
+"res://addons/": "gray"
+}
+
 [input]
 
 m_left={
