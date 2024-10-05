@@ -7,7 +7,12 @@ var cell_data
 
 @onready var sprite : Sprite2D = $Sprite
 
+#TODO: Earning money, buying seeds
 func harvest() -> int:
+	var tween = create_tween()
+	tween.tween_property(self, "scale", 0, 0.5)
+	tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	tween.tween_callback(queue_free)
 	return value
 
 func _on_next_stage_timer_timeout() -> void:

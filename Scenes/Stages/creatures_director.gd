@@ -3,9 +3,6 @@ extends Node2D
 @onready var soil_tml : SoilTileMapLayer = $"../TileMap/Soil"
 @export var c_raven : PackedScene
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	_summon_creature()
 
 #TODO: make summoning choose randomly
 #TODO: Director algorithm
@@ -21,10 +18,17 @@ func _summon_creature() -> void:
 	add_child(inst)
 	
 	
-func _select_random_plant() -> CellData:	
-	return soil_tml.get_attackable_cells().pick_random()
+func _select_random_plant() -> CellData:
+	var cells = soil_tml.get_attackable_cells()
+	if cells.size() == 0:
+		return null
+	return cells.pick_random()
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+func _on_creature_timer_timeout() -> void:
+	pass # Replace with function body.

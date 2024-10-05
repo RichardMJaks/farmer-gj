@@ -13,8 +13,23 @@ func _process(delta: float) -> void:
 	_get_actionable_tile()
 	#TODO: Add action detection, make actions possible
 	if Input.is_action_just_pressed("a_action"):
+		_action()
+
+func _action() -> void:
+	if not actionable_tile:
+		print("Not actionable")
+		return
+	if actionable_tile.has_creature:
+		print("Hitting creature")
+		_hit()
+		return
+	if actionable_tile.planted_crop == "":
+		print("Planting")
 		_plant()
-	
+	else:
+		print("harvesting")
+		_harvest()
+
 #TODO: Action: Hitting
 func _hit() -> void:
 	pass
@@ -24,7 +39,7 @@ func _plant() -> void:
 	soil_tml.plant("eggplant", actionable_tile)
 
 func _harvest() -> void:
-	var cell_data = actionable_tile
+	actionable_tile.harvest()
 
 #TODO: Action: buying
 func _buy() -> void:
@@ -49,5 +64,4 @@ func _physics_process(delta: float) -> void:
 
 func _get_actionable_tile() -> CellData:
 	actionable_tile = soil_tml.c_get_cell_data(soil_tml.local_to_map(position))
-	print(soil_tml.c_get_cell_data(soil_tml.local_to_map(position)))
 	return actionable_tile

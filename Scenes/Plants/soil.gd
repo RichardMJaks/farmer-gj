@@ -31,9 +31,12 @@ func c_get_cell_data(coords : Vector2i) -> CellData:
 
 func plant(crop : String, data : CellData) -> void:
 	var l_crop : PackedScene = crops[crop]
+	if not data:
+		return
 	data.planted_crop = crop
 	
 	var i_crop : Crop = l_crop.instantiate()
 	i_crop.cell_data = data
 	i_crop.global_position = map_to_local(data.coords)
+	data.crop = i_crop
 	add_child(i_crop)

@@ -14,9 +14,15 @@ func _process(delta: float) -> void:
 		stage = 3
 
 func harvest() -> int:
+	print(crop)
 	var earned_coins : int = 0
+	if stage < 2:
+		return 0
 	if stage == 2:
 		earned_coins += crop.harvest()
+	if stage > 2:
+		crop.harvest()
+	
 	stage = 0
 	planted_crop = ""
 	health = 3
