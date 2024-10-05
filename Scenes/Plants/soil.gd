@@ -12,7 +12,6 @@ func _ready() -> void:
 		var cell_data = CellData.new()
 		cell_data.coords = cell
 		grid_data[cell] = cell_data
-	print(grid_data)
 
 func get_attackable_cells() -> Array[CellData]:
 	var cell_datas = grid_data.values()

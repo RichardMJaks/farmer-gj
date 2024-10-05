@@ -9,10 +9,6 @@ var crop : Crop
 var health : int = 3
 var stage = 0
 
-func _process(delta: float) -> void:
-	if health <= 0:
-		stage = 3
-
 func harvest() -> int:
 	print(crop)
 	var earned_coins : int = 0

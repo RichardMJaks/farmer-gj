@@ -8,6 +8,7 @@ extends Node2D
 #TODO: Director algorithm
 #TODO: Difficulty curve
 func _summon_creature() -> void:
+	print("summoning")
 	var cell_data : CellData = _select_random_plant()
 	if not cell_data:
 		return
@@ -23,12 +24,6 @@ func _select_random_plant() -> CellData:
 	if cells.size() == 0:
 		return null
 	return cells.pick_random()
-	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 
 func _on_creature_timer_timeout() -> void:
-	pass # Replace with function body.
+	_summon_creature()

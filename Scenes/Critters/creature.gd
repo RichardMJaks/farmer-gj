@@ -7,6 +7,7 @@ var target_tile : Vector2
 func _ready() -> void:
 	cell_data.has_creature = true
 	global_position = Vector2(300 * [1, -1].pick_random(), 300 * [1, -1].pick_random())
+	_tween_to_position()
 
 func _tween_to_position() -> void:
 	var tween : Tween = create_tween()
@@ -16,6 +17,7 @@ func _tween_to_position() -> void:
 
 func _process(delta: float) -> void:
 	if cell_data.health == 0:
+		cell_data.stage = 3
 		var tween : Tween  = create_tween()
 		tween.tween_property(self, "position", _get_exit_pos(), 1)
 		tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
@@ -31,6 +33,7 @@ func _tween_hit() -> void:
 	tween.tween_property(self, "rotation_degrees", 60, 0.2)
 	tween.tween_callback(func():
 		cell_data.health -= 1
+		print("Hit cell " + str(cell_data.coords) + "| Health: " + str(cell_data.health))
 		var twen = create_tween()
 		twen.tween_property(self, "rotation_degrees", 0, 0.5)
 		twen.tween_callback($Node/HitTimer.start)
