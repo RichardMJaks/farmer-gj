@@ -6,7 +6,13 @@ var target_tile : Vector2
 
 func _ready() -> void:
 	cell_data.has_creature = true
-	global_position = target_tile
+	global_position = Vector2(300 * [1, -1].pick_random(), 300 * [1, -1].pick_random())
+
+func _tween_to_position() -> void:
+	var tween : Tween = create_tween()
+	tween.tween_property(self, "position", target_tile, 5)
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_callback($Node/FirstStrikeTimer.start)
 
 func _process(delta: float) -> void:
 	if cell_data.health == 0:

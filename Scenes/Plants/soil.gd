@@ -2,6 +2,9 @@ class_name SoilTileMapLayer
 extends TileMapLayer
 
 var grid_data : Dictionary = {}
+@onready var crops : Dictionary = {
+	"eggplant" : preload("res://Scenes/Plants/eggplant.tscn")
+}
 
 func _ready() -> void:
 	var cells = get_used_cells()
@@ -11,11 +14,29 @@ func _ready() -> void:
 		grid_data[cell] = cell_data
 	print(grid_data)
 
+func get_attackable_cells() -> Array[CellData]:
+	var cell_datas = grid_data.values()
+	var attackable_cells : Array[CellData] = []
+	
+	for cell : CellData in cell_datas:
+		if cell.attackable():
+			attackable_cells.append(cell)
+	
+	return attackable_cells;
+
 func c_get_cell_data(coords : Vector2i) -> CellData:
 	if not grid_data.has(coords):
 		return null
 	return grid_data[coords]
 
-func plant(plant : String, data : TileData) -> void:
-	print("planting " + plant)
-	data.set_custom_data("plant", "rose")
+func plant(crop : String, data : CellData) -> void:
+	var l_crop : PackedScene = crops[crop]
+	if not data:
+		return
+	data.planted_crop = crop
+	
+	var i_crop : Crop = l_crop.instantiate()
+	i_crop.cell_data = data
+	i_crop.global_position = map_to_local(data.coords)
+	data.crop = i_crop
+	add_child(i_crop)
