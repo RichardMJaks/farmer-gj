@@ -12,15 +12,9 @@ func _physics_process(delta: float) -> void:
 	var dir_vec : Vector2 = Vector2(h_dir, v_dir).normalized()
 	
 	if dir_vec.length() != 0:
-		velocity = _get_clamped_velocity(dir_vec)
+		velocity = dir_vec * speed
+	else:
+		velocity = Vector2.ZERO
 		
+	print(velocity.length())
 	move_and_slide()
-
-func _get_clamped_velocity(v : Vector2) -> Vector2:
-	var delta_acceleration = _calc_accel_from_time(acceleration_time) * v
-	var new_velocity = velocity + delta_acceleration
-	return new_velocity.clamp(Vector2(-speed, -speed), Vector2(speed, speed))
-	
-
-func _calc_accel_from_time(time : float) -> float:
-	return speed / time
