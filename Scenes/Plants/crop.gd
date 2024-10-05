@@ -6,6 +6,7 @@ var cell_data
 @export var value : int = 0
 
 @onready var sprite : Sprite2D = $Sprite
+@onready var anim : AnimationPlayer = $AnimationPlayer
 
 var harvesting : bool = false
 
@@ -22,6 +23,9 @@ func harvest() -> int:
 		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(queue_free)
 	return value
+
+func take_damage() -> void:
+	anim.play("take_damage")
 
 func _on_next_stage_timer_timeout() -> void:
 	if cell_data.stage < 3:
