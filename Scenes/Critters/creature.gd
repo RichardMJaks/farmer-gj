@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 var cell_data : CellData
 var target_tile : Vector2
+var is_ded = false
 
 @onready var anim : AnimationPlayer = $AnimationPlayer
 @onready var entry_tween : Tween = _create_entry_tween()
@@ -17,9 +18,12 @@ func _create_entry_tween() -> Tween:
 	return tween
 
 func _process(delta: float) -> void:
-	if cell_data.is_dead():
+	if cell_data.is_dead() and not is_ded:
+		is_ded = true
 		cell_data.stage = 3
 		_leave()
+	
+	move_and_slide()
 
 func _arrival() -> void:
 	$Node/FirstStrikeTimer.start()
@@ -34,24 +38,30 @@ func _attack() -> void:
 	anim.play("hit")
 
 func _hit() -> void:
-	print("hitting")
 	cell_data.take_damage()
 	
 func get_kicked(c : CharacterBody2D) -> void:
+	is_ded = true
 	$Node/FirstStrikeTimer.stop()
 	var dir : Vector2 = (global_position - c.global_position).normalized()
-	velocity = dir * 300
+	velocity = dir * 200
 	anim.play("get_kicked")
+	cell_data.has_creature = false
+	cell_data.set_creature(null)
 	$Node/ExpirationTimer.start()
 
 func _leave() -> void:
+	print("leaving")
+	cell_data.has_creature = false
+	cell_data.set_creature(null)
+	anim.stop()
 	var dir : Vector2 = Vector2.from_angle(randf_range(0, 2*PI))
-	velocity = dir * 300
+	velocity = dir * 100
 	$Node/FirstStrikeTimer.stop()
 	$Node/ExpirationTimer.start()
 
 func _on_first_strike_timer_timeout() -> void:
-	_hit()
+	_attack()
 
 func _on_expiration_timer_timeout() -> void:
 	queue_free()

@@ -18,10 +18,8 @@ func _process(delta: float) -> void:
 #TODO: Earning money, buying seeds
 func harvest() -> int:
 	harvesting = true
-	var tween = create_tween()
-	tween.tween_property(self, "scale", Vector2(0,0), 0.5)\
-		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	tween.tween_callback(queue_free)
+	anim.play("harvest")
+	anim.animation_finished.connect(queue_free)
 	return value
 
 func take_damage() -> void:

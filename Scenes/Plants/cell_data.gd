@@ -22,8 +22,10 @@ func harvest() -> int:
 		return 0
 	if stage == 2:
 		earned_coins += crop.harvest()
+		stage = 0
 	if stage > 2:
 		crop.harvest()
+		stage = 0
 	
 	stage = 0
 	planted_crop = ""

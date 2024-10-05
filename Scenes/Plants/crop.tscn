@@ -1,7 +1,46 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxp4kuxpl2mmx"]
+[gd_scene load_steps=7 format=3 uid="uid://cxp4kuxpl2mmx"]
 
 [ext_resource type="Script" path="res://Scenes/Plants/crop.gd" id="1_5whot"]
 [ext_resource type="Texture2D" uid="uid://d6bbrms44s1o" path="res://Art/crops.png" id="1_rfcq6"]
+
+[sub_resource type="Animation" id="Animation_xc2bs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_164na"]
 resource_name = "take_damage"
@@ -31,36 +70,27 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1), Color(0.9263, 1.56425e-06, 3.85046e-07, 1), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_xc2bs"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_msnip"]
+resource_name = "harvest"
+length = 0.7
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:skew")
+tracks/0/path = NodePath("Sprite:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2, 0.45, 0.7),
+"transitions": PackedFloat32Array(4.75683, 0.307786, 0.307786, 1),
 "update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(1, 1), Vector2(0.8, 0.8), Vector2(1.3, 1.3), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gmdpi"]
 _data = {
 "RESET": SubResource("Animation_xc2bs"),
+"harvest": SubResource("Animation_msnip"),
 "take_damage": SubResource("Animation_164na")
 }
 
@@ -71,6 +101,7 @@ script = ExtResource("1_5whot")
 texture = ExtResource("1_rfcq6")
 hframes = 4
 vframes = 4
+frame = 2
 
 [node name="NextStageTimer" type="Timer" parent="."]
 wait_time = 10.0
