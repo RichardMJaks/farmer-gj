@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var soil_tml : SoilTileMapLayer = $"../TileMap/Soil"
 @onready var anim : AnimationPlayer = $AnimationPlayer
 
+var debug_chosen_crop = "wheat"
 var actionable_tile : CellData
 
 func _process(delta: float) -> void:
@@ -14,6 +15,14 @@ func _process(delta: float) -> void:
 	#TODO: Add action detection, make actions possible
 	if Input.is_action_just_pressed("a_action"):
 		_action()
+	if Input.is_key_pressed(KEY_1):
+		debug_chosen_crop = "wheat"
+	if Input.is_key_pressed(KEY_2):
+		debug_chosen_crop = "tomato"
+	if Input.is_key_pressed(KEY_3):
+		debug_chosen_crop = "eggplant"
+	if Input.is_key_pressed(KEY_4):
+		debug_chosen_crop = "pumpkin"
 
 func _action() -> void:
 	if not actionable_tile:
@@ -32,11 +41,11 @@ func _action() -> void:
 
 #TODO: Action: Hitting
 func _hit() -> void:
-	pass
+	actionable_tile.creature.get_kicked(self)
 
 #TODO Action: planting
 func _plant() -> void:
-	soil_tml.plant("eggplant", actionable_tile)
+	soil_tml.plant(debug_chosen_crop, actionable_tile)
 
 func _harvest() -> void:
 	actionable_tile.harvest()

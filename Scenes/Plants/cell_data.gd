@@ -10,7 +10,6 @@ var health : int = 3
 var stage = 0
 
 func harvest() -> int:
-	print(crop)
 	var earned_coins : int = 0
 	if stage < 2:
 		return 0

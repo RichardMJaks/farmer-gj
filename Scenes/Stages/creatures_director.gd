@@ -16,8 +16,9 @@ func _summon_creature() -> void:
 	var inst : Creature = c_raven.instantiate()
 	inst.cell_data = cell_data
 	inst.target_tile = soil_tml.map_to_local(cell_data.coords)
-	add_child(inst)
-	
+	inst.global_position = Vector2(150 * [1, -1].pick_random(), 200 * [1, -1].pick_random())
+
+	add_child(inst)	
 	
 func _select_random_plant() -> CellData:
 	var cells = soil_tml.get_attackable_cells()
