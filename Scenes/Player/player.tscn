@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk3volyh844lb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m3s0a"]
+size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p0wfr"]
+radius = 32.0
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_m3s0a")
+
+[node name="ActionRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionRange"]
+shape = SubResource("CircleShape2D_p0wfr")
+debug_color = Color(0.5565, 0.553915, 0.262622, 0.42)
