@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var acceleration_time : float
 
 @onready var soil_tml : SoilTileMapLayer = $"../TileMap/Soil"
+@onready var anim : AnimationPlayer = $AnimationPlayer
 
 var actionable_tile : CellData
 
@@ -36,8 +37,10 @@ func _physics_process(delta: float) -> void:
 	
 	if dir_vec.length() != 0:
 		velocity = dir_vec * speed
+		anim.play("walking")
 	else:
 		velocity = Vector2.ZERO
+		anim.play("idle")
 
 	move_and_slide()
 

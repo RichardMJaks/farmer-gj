@@ -2,6 +2,11 @@ class_name Creature
 extends AnimatableBody2D
 
 var cell_data : CellData
+var target_tile : Vector2
+
+func _ready() -> void:
+	cell_data.has_creature = true
+	global_position = target_tile
 
 func _process(delta: float) -> void:
 	if cell_data.health == 0:
