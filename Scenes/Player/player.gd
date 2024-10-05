@@ -10,10 +10,23 @@ var actionable_tile : CellData
 
 func _process(delta: float) -> void:
 	_get_actionable_tile()
+	#TODO: Add action detection, make actions possible
 	if Input.is_action_just_pressed("a_action"):
 		actionable_tile.plant = "rose"
 	
+#TODO: Action: Hitting
+func _hit() -> void:
+	pass
 
+#TODO Action: planting
+func _plant() -> void:
+	pass
+
+#TODO: Action: buying
+func _buy() -> void:
+	pass
+
+#TODO: Add inventory?
 
 func _physics_process(delta: float) -> void:
 	var h_dir : float = Input.get_axis("m_left", "m_right")

@@ -11,6 +11,7 @@ script = ExtResource("1_v2qtl")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_5wneu")
+vframes = 2
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_m3s0a")
