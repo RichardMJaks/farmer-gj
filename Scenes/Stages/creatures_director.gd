@@ -18,7 +18,7 @@ func _summon_creature() -> void:
 	inst.target_tile = soil_tml.map_to_local(cell_data.coords)
 	inst.global_position = Vector2(150 * [1, -1].pick_random(), 200 * [1, -1].pick_random())
 
-	add_child(inst)	
+	get_tree().current_scene.add_child(inst)
 	
 func _select_random_plant() -> CellData:
 	var cells = soil_tml.get_attackable_cells()

@@ -1,68 +1,67 @@
 class_name Creature
-extends AnimatableBody2D
+extends CharacterBody2D
 
 var cell_data : CellData
 var target_tile : Vector2
+var is_ded = false
 
-var getting_kicked : bool = true
-
-func _ready() -> void:
-	cell_data.creature = self
-	_tween_to_position()
-
-func _tween_to_position() -> void:
-	var tween : Tween = create_tween()
-	tween.tween_property(self, "position", target_tile, 5)
-	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_callback(func(): 
-		$Node/FirstStrikeTimer.start()
-		cell_data.has_creature = true
-	)
+@onready var anim : AnimationPlayer = $AnimationPlayer
+@onready var entry_tween : Tween = _create_entry_tween()
+func _create_entry_tween() -> Tween:
+	var tween = create_tween()
+	tween.tween_property(self, "position", target_tile, 1)\
+		.set_trans(Tween.TRANS_CUBIC)\
+		.set_ease(Tween.EASE_OUT)
+	tween.tween_callback(_arrival)
+	tween.stop()
+	
+	return tween
 
 func _process(delta: float) -> void:
-	if cell_data.health == 0 or cell_data.planted_crop == "":
-		if cell_data.health == 0:
-			cell_data.stage = 3
-		cell_data.has_creature = false
-		var tween : Tween  = create_tween()
-		tween.tween_property(self, "position", _get_exit_pos(), 1)\
-			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-		tween.tween_callback(queue_free)
-
-func get_kicked(player : CharacterBody2D) -> void:
-	$Node/HitTimer.paused = true
-	$Node/FirstStrikeTimer.paused = true
-	var kick_direction = (global_position - player.global_position).normalized() * 300
-	var tween : Tween = create_tween()
-	cell_data.has_creature = false
-	tween.tween_property(self, "global_position", position + kick_direction, 3).set_ease(Tween.EASE_OUT)
-	# tween.parallel().tween_property(self, "rotation_degrees", 1080, 3).set_ease(Tween.EASE_OUT)
-	tween.tween_callback(queue_free)
-	 
+	if cell_data.is_dead() and not is_ded:
+		is_ded = true
+		cell_data.stage = 3
+		_leave()
 	
-func _get_exit_pos() -> Vector2:
-	return Vector2(100, 100)
+	move_and_slide()
 
-#TODO: Make tween correct
-#TODO: Handle shit correctly ff
-func _tween_hit() -> void:
-	if getting_kicked:
-		return
-	var tween : Tween = create_tween()
-	tween.tween_property(self, "rotation_degrees", 60, 0.2)
-	tween.tween_callback(func():
-		cell_data.health -= 1
-		print("Hit cell " + str(cell_data.coords) + "| Health: " + str(cell_data.health))
-		var twen = create_tween()
-		twen.tween_property(self, "rotation_degrees", 0, 0.5)
-		twen.tween_callback($Node/HitTimer.start)
-	)
+func _arrival() -> void:
+	$Node/FirstStrikeTimer.start()
+	cell_data.has_creature = true
+	cell_data.set_creature(self)
+	entry_tween.kill()
 
-#TODO: remove autostart, tween in
+func _ready() -> void:
+	entry_tween.play()
+
+func _attack() -> void:
+	anim.play("hit")
+
+func _hit() -> void:
+	cell_data.take_damage()
+	
+func get_kicked(c : CharacterBody2D) -> void:
+	is_ded = true
+	$Node/FirstStrikeTimer.stop()
+	var dir : Vector2 = (global_position - c.global_position).normalized()
+	velocity = dir * 200
+	anim.play("get_kicked")
+	cell_data.has_creature = false
+	cell_data.set_creature(null)
+	$Node/ExpirationTimer.start()
+
+func _leave() -> void:
+	print("leaving")
+	cell_data.has_creature = false
+	cell_data.set_creature(null)
+	anim.stop()
+	var dir : Vector2 = Vector2.from_angle(randf_range(0, 2*PI))
+	velocity = dir * 100
+	$Node/FirstStrikeTimer.stop()
+	$Node/ExpirationTimer.start()
+
 func _on_first_strike_timer_timeout() -> void:
-	_tween_hit()
+	_attack()
 
-
-func _on_hit_timer_timeout() -> void:
-	if not cell_data.health == 0:
-		_tween_hit()
+func _on_expiration_timer_timeout() -> void:
+	queue_free()
