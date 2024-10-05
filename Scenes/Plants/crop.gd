@@ -19,7 +19,7 @@ func harvest() -> int:
 	harvesting = true
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2(0,0), 0.5)\
-		.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_IN)
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(queue_free)
 	return value
 
