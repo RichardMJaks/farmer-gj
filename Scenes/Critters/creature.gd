@@ -30,14 +30,13 @@ func _process(delta: float) -> void:
 		tween.tween_callback(queue_free)
 
 func get_kicked(player : CharacterBody2D) -> void:
-	$Node/HitTimer.stop()
-	$Node/FirstStrikeTimer.stop()
+	$Node/HitTimer.paused = true
+	$Node/FirstStrikeTimer.paused = true
 	var kick_direction = (global_position - player.global_position).normalized() * 300
-	print(kick_direction)
 	var tween : Tween = create_tween()
 	cell_data.has_creature = false
-	tween.tween_property(self, "position", kick_direction, 3).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(self, "rotation_degrees", 1080, 3).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "global_position", position + kick_direction, 3).set_ease(Tween.EASE_OUT)
+	# tween.parallel().tween_property(self, "rotation_degrees", 1080, 3).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(queue_free)
 	 
 	
@@ -47,6 +46,8 @@ func _get_exit_pos() -> Vector2:
 #TODO: Make tween correct
 #TODO: Handle shit correctly ff
 func _tween_hit() -> void:
+	if getting_kicked:
+		return
 	var tween : Tween = create_tween()
 	tween.tween_property(self, "rotation_degrees", 60, 0.2)
 	tween.tween_callback(func():
