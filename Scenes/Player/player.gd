@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 	_get_actionable_tile()
 	#TODO: Add action detection, make actions possible
 	if Input.is_action_just_pressed("a_action"):
-		actionable_tile.plant = "rose"
+		_plant()
 	
 #TODO: Action: Hitting
 func _hit() -> void:
@@ -21,7 +21,10 @@ func _hit() -> void:
 
 #TODO Action: planting
 func _plant() -> void:
-	pass
+	soil_tml.plant("eggplant", actionable_tile)
+
+func _harvest() -> void:
+	var cell_data = actionable_tile
 
 #TODO: Action: buying
 func _buy() -> void:

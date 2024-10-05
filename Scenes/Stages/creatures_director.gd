@@ -21,27 +21,8 @@ func _summon_creature() -> void:
 	add_child(inst)
 	
 	
-func _select_random_plant() -> CellData:
-	var cell_data = null
-	var cell_datas = soil_tml.grid_data.values()
-	var selected = null
-	var tested : Array[int] = []
-	var l_cell_datas = cell_datas.size()
-	
-	#HACK: wtf is this fr
-	while !selected or tested.size() >= (l_cell_datas - 1):
-		var rng = randi_range(0, l_cell_datas - 1)
-		while tested.has(rng):
-			rng = randi_range(0, l_cell_datas - 1)
-			if tested.size() >= (l_cell_datas - 1):
-				break
-		tested.append(rng)
-		var t_cell_data = cell_datas[rng]
-		if t_cell_data.plant != "" and not t_cell_data.has_creature:
-			cell_data = t_cell_data
-			break
-	
-	return cell_data
+func _select_random_plant() -> CellData:	
+	return soil_tml.get_attackable_cells().pick_random()
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
