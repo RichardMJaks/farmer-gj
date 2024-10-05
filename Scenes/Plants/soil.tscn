@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1yiolra5ob08"]
+[gd_scene load_steps=3 format=3 uid="uid://d1yiolra5ob08"]
 
 [ext_resource type="TileSet" uid="uid://ckphovyyemqwh" path="res://Resources/Tilesets/tileset_farm.tres" id="1_mhtq0"]
+[ext_resource type="Script" path="res://Scenes/Plants/soil.gd" id="2_2xuvq"]
 
 [node name="Soil" type="TileMapLayer"]
 tile_set = ExtResource("1_mhtq0")
+script = ExtResource("2_2xuvq")

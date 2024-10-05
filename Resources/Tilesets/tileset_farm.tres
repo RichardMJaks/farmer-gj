@@ -1,14 +1,15 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://ckphovyyemqwh"]
 
-[ext_resource type="Texture2D" uid="uid://33qjtqq2801s" path="res://Art/tileset_farm.png" id="1_g2wxu"]
+[ext_resource type="Texture2D" uid="uid://33qjtqq2801s" path="res://Art/tileset_farm.png" id="1_hnx4h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o34rx"]
-texture = ExtResource("1_g2wxu")
+texture = ExtResource("1_hnx4h")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
 0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:1/0 = 0
 2:1/0 = 0
 3:1/0 = 0
@@ -23,4 +24,10 @@ texture = ExtResource("1_g2wxu")
 0:4/0 = 0
 
 [resource]
+physics_layer_0/collision_layer = 2
+physics_layer_0/collision_mask = 2
+custom_data_layer_0/name = "has_creature"
+custom_data_layer_0/type = 1
+custom_data_layer_1/name = "plant"
+custom_data_layer_1/type = 4
 sources/0 = SubResource("TileSetAtlasSource_o34rx")
