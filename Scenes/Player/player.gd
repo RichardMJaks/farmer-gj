@@ -7,11 +7,10 @@ extends CharacterBody2D
 @onready var soil_tml : SoilTileMapLayer = $"../TileMap/Soil"
 # @onready var anim : AnimationPlayer = $AnimationPlayer
 @onready var state_machine : Node = $StateMachine
-@onready var sprite : Sprite2D = $Sprite
 @onready var sprite_marker : Marker2D = $Marker2D
 @onready var indicator_tml : TileMapLayer = $"../TileMap/Indicator"
 
-var debug_chosen_crop = "wheat"
+var held_crop : Seed
 var actionable_tile : CellData
 
 @onready var audio_planting : AudioStreamPlayer = $Audio/Planting
@@ -21,24 +20,19 @@ func _process(_delta: float) -> void:
 	_get_actionable_tile()
 	if Input.is_action_just_pressed("a_action"):
 		_action()
-	if Input.is_key_pressed(KEY_1):
-		debug_chosen_crop = "wheat"
-	if Input.is_key_pressed(KEY_2):
-		debug_chosen_crop = "tomato"
-	if Input.is_key_pressed(KEY_3):
-		debug_chosen_crop = "eggplant"
-	if Input.is_key_pressed(KEY_4):
-		debug_chosen_crop = "pumpkin"
-
+	
 func _action() -> void:
 	if not actionable_tile:
 		return
 	if actionable_tile.has_creature:
 		_attack()
 		return
-	if actionable_tile.planted_crop == "":
+	if actionable_tile.is_shop:
+		_buy()
+		return
+	if actionable_tile.planted_crop == "" and held_crop:
 		_plant()
-	else:
+	elif actionable_tile.stage > 1:
 		_harvest()
 
 #TODO: Action: Hitting
@@ -46,16 +40,17 @@ func _attack() -> void:
 	state_machine.set_state("kicking")
 	
 func _hit() -> void:
+	if not actionable_tile:
+		return
 	self.actionable_tile.creature.get_kicked(self)
 
 #TODO Action: planting
 func _plant() -> void:
-	soil_tml.plant(debug_chosen_crop, actionable_tile)
+	soil_tml.plant(held_crop, actionable_tile)
 	audio_planting.play()
 
 func _harvest() -> void:
-	if actionable_tile.stage > 1:
-		audio_harvesting.play()
+	audio_harvesting.play()
 	actionable_tile.harvest()	
 
 #TODO: Action: buying
@@ -85,10 +80,30 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func _get_actionable_tile() -> CellData:
+	indicator_tml.remove_indicator()
 	if state_machine.state == "kicking":
 		return null
-	actionable_tile = soil_tml.c_get_cell_data(soil_tml.local_to_map(position))
-	indicator_tml.remove_indicator()
-	if actionable_tile:
-		indicator_tml.move_indicator(actionable_tile.coords)
-	return actionable_tile
+	
+	var potential_actionable_tile = soil_tml.c_get_cell_data(soil_tml.local_to_map(position))
+	
+	if not potential_actionable_tile:
+		return null
+	
+	if potential_actionable_tile.is_shop:
+		return _set_actionable_tile(potential_actionable_tile)
+	
+	if potential_actionable_tile.has_creature:
+		return _set_actionable_tile(potential_actionable_tile)
+	
+	if potential_actionable_tile.planted_crop != "" and potential_actionable_tile.stage > 1:
+		return _set_actionable_tile(potential_actionable_tile)
+	
+	if potential_actionable_tile.planted_crop == "" and held_crop != "":
+		return _set_actionable_tile(potential_actionable_tile)
+		
+	return null
+	
+func _set_actionable_tile(tile : CellData) -> CellData:
+	actionable_tile = tile
+	indicator_tml.move_indicator(tile.coords)
+	return tile

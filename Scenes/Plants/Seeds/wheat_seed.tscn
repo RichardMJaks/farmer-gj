@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://g60o2181rych"]
+
+[ext_resource type="PackedScene" uid="uid://63fgvxcjcois" path="res://Scenes/Plants/Seeds/seed.tscn" id="1_ajo46"]
+[ext_resource type="PackedScene" uid="uid://rml0q40jxse7" path="res://Scenes/Plants/wheat.tscn" id="2_68xsb"]
+
+[node name="WheatSeed" instance=ExtResource("1_ajo46")]
+seed_name = "wheat"
+crop = ExtResource("2_68xsb")
+
+[node name="Sprite" parent="." index="0"]
+frame = 3

@@ -4,12 +4,14 @@ extends CharacterBody2D
 var cell_data : CellData
 var target_tile : Vector2
 var is_ded = false
+@export var danger_arrow : PackedScene
+var arrow_inst
 
 @onready var anim : AnimationPlayer = $AnimationPlayer
 @onready var entry_tween : Tween = _create_entry_tween()
 func _create_entry_tween() -> Tween:
 	var tween = create_tween()
-	tween.tween_property(self, "position", target_tile, 1)\
+	tween.tween_property(self, "position", target_tile - Vector2(5, -5), 1)\
 		.set_trans(Tween.TRANS_CUBIC)\
 		.set_ease(Tween.EASE_OUT)
 	tween.tween_callback(_arrival)
@@ -33,6 +35,7 @@ func _arrival() -> void:
 
 func _ready() -> void:
 	entry_tween.play()
+	$Sprite2D.frame = randi_range(0, 9)
 
 func _attack() -> void:
 	anim.play("hit")
@@ -51,7 +54,6 @@ func get_kicked(c : CharacterBody2D) -> void:
 	$Node/ExpirationTimer.start()
 
 func _leave() -> void:
-	print("leaving")
 	cell_data.has_creature = false
 	cell_data.set_creature(null)
 	anim.stop()

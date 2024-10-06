@@ -8,6 +8,8 @@ var cell_data
 @onready var sprite : Sprite2D = $Sprite
 @onready var anim : AnimationPlayer = $AnimationPlayer
 
+@onready var ind_arrow : Node2D = $Indicators/DangerArrow
+
 var harvesting : bool = false
 
 func _process(_delta: float) -> void:

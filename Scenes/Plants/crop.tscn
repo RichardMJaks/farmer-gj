@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxp4kuxpl2mmx"]
+[gd_scene load_steps=10 format=3 uid="uid://cxp4kuxpl2mmx"]
 
 [ext_resource type="Script" path="res://Scenes/Plants/crop.gd" id="1_5whot"]
 [ext_resource type="Texture2D" uid="uid://d6bbrms44s1o" path="res://Art/crops.png" id="1_rfcq6"]
+[ext_resource type="PackedScene" uid="uid://lqk0fvpg1n2m" path="res://Scenes/GUI/danger_arrow.tscn" id="3_vymp4"]
+[ext_resource type="Script" path="res://Scenes/Plants/indicator_handler.gd" id="3_wesxv"]
+[ext_resource type="PackedScene" uid="uid://dmf2two75gpbl" path="res://Scenes/GUI/time.tscn" id="5_5p7ow"]
 
 [sub_resource type="Animation" id="Animation_xc2bs"]
 length = 0.001
@@ -111,5 +114,19 @@ autostart = true
 libraries = {
 "": SubResource("AnimationLibrary_gmdpi")
 }
+
+[node name="Indicators" type="Node2D" parent="."]
+position = Vector2(0, -12)
+script = ExtResource("3_wesxv")
+
+[node name="DangerArrow" parent="Indicators" instance=ExtResource("3_vymp4")]
+visible = false
+z_index = 1
+z_as_relative = false
+
+[node name="Time" parent="Indicators" instance=ExtResource("5_5p7ow")]
+visible = false
+z_index = 1
+z_as_relative = false
 
 [connection signal="timeout" from="NextStageTimer" to="." method="_on_next_stage_timer_timeout"]

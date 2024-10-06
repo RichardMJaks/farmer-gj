@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://da5g6s70kykj7"]
+[gd_scene load_steps=8 format=3 uid="uid://da5g6s70kykj7"]
 
 [ext_resource type="Texture2D" uid="uid://jgc4mks6l2nl" path="res://Art/pesky creatures.png" id="1_6f28l"]
 [ext_resource type="Script" path="res://Scenes/Critters/creature.gd" id="1_7jhva"]
+[ext_resource type="PackedScene" uid="uid://lqk0fvpg1n2m" path="res://Scenes/GUI/danger_arrow.tscn" id="2_yexxl"]
 
 [sub_resource type="Animation" id="Animation_wxpyn"]
 length = 0.001
@@ -76,6 +77,7 @@ _data = {
 
 [node name="Creature" type="CharacterBody2D"]
 script = ExtResource("1_7jhva")
+danger_arrow = ExtResource("2_yexxl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_6f28l")
