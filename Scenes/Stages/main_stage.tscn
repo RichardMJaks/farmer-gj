@@ -70,7 +70,7 @@ _data = {
 "default": SubResource("Animation_rlf0e")
 }
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ebaab"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tusv4"]
 texture = ExtResource("15_8v17g")
 0:0/0 = 0
 1:0/0 = 0
@@ -96,7 +96,7 @@ texture = ExtResource("15_8v17g")
 6:3/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_33p5k"]
-sources/0 = SubResource("TileSetAtlasSource_ebaab")
+sources/0 = SubResource("TileSetAtlasSource_tusv4")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_re6um"]
 atlas = ExtResource("17_2n5g3")
