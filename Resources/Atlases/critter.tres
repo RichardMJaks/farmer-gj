@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://c748f7osdfele"]
+
+[ext_resource type="Texture2D" uid="uid://jgc4mks6l2nl" path="res://Art/pesky creatures.png" id="1_312q2"]
+
+[resource]
+atlas = ExtResource("1_312q2")
+region = Rect2(8, 8, 8, 8)

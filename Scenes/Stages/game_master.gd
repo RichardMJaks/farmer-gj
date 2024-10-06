@@ -8,6 +8,7 @@ var shop_tiles : Array[CellData] = []
 
 var total_money : int = 0
 var total_crops : int = 0
+var kicked : int = 0
 
 var money_time_multiplier : float = 0.1
 
@@ -50,6 +51,11 @@ func _process(delta: float) -> void:
 	total_time += delta
 	remaining_time -= delta
 	
+	if remaining_time <= 0:
+		game_started = false
+		_init_game_over()
+		return
+	
 	if total_time > 30 and seed_selection.size() < 2:
 		seed_selection.append("pumpkin")
 		creatures_director.nr_of_creatures_per_wave = 2
@@ -59,7 +65,21 @@ func _process(delta: float) -> void:
 	if total_time > 90 and seed_selection.size() < 4:
 		seed_selection.append("eggplant")
 		creatures_director.nr_of_creatures_per_wave = 4
+
+func _init_game_over():
+	var t =	$"Game End/Node2D/VBoxContainer/Time Survived/Label".text + str(ceili(total_time)) + " seconds"
+	$"Game End/Node2D/VBoxContainer/Time Survived/Label".text = t
+	t = $"Game End/Node2D/VBoxContainer/Crops Collected/Label".text + str(total_crops)
+	$"Game End/Node2D/VBoxContainer/Crops Collected/Label".text = t
+	t = $"Game End/Node2D/VBoxContainer/Critters Kicked/Label".text + str(kicked)
+	$"Game End/Node2D/VBoxContainer/Critters Kicked/Label".text = t
 	
+	$"Game End".visible = true
+	HUD.visible = false
+	
+	var tween : Tween  = $"Game End/Node2D".create_tween()
+	tween.tween_property($"Game End/Node2D", "position:y", 0, 3)\
+	.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 
 func _init_shop_tiles() -> void:
 	for cell : CellData in soil_tml.grid_data.values():

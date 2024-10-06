@@ -50,6 +50,7 @@ func _attack() -> void:
 func _hit() -> void:
 	kick_creature.get_kicked(self)
 	kick_creature = null
+	GameMaster.kicked += 1
 
 #TODO Action: planting
 func _plant() -> void:
