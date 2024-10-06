@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://dms8d5ry6iy6m"]
+[gd_scene load_steps=32 format=4 uid="uid://dms8d5ry6iy6m"]
 
 [ext_resource type="TileSet" uid="uid://dan6cuo8k8ug7" path="res://Resources/Tilesets/environment.tres" id="1_2lugi"]
 [ext_resource type="Script" path="res://Scenes/Stages/main_stage.gd" id="1_f2roh"]
@@ -15,13 +15,14 @@
 [ext_resource type="Texture2D" uid="uid://c1re7k1aqyn1h" path="res://Art/pickup truck.png" id="12_4o0jh"]
 [ext_resource type="Script" path="res://Scenes/Stages/time_counter.gd" id="13_sfrhc"]
 [ext_resource type="Texture2D" uid="uid://ugtodcuqecr" path="res://Art/ui.png" id="15_8v17g"]
-[ext_resource type="AudioStream" uid="uid://yoi334sk0m24" path="res://Sound/Music/Mainbackroundmusic.ogg" id="15_xswk2"]
 [ext_resource type="Texture2D" uid="uid://cl0sj4elecnq5" path="res://Art/game over ui.png" id="16_6hcga"]
 [ext_resource type="AudioStream" uid="uid://dwmurnghlixna" path="res://Sound/Music/ambience.ogg" id="16_atbnk"]
 [ext_resource type="Texture2D" uid="uid://c3gnsf1a54a0s" path="res://Art/Icons.png" id="17_2n5g3"]
 [ext_resource type="Texture2D" uid="uid://dytwbfut07wwl" path="res://Art/market stall.png" id="17_eeec2"]
 [ext_resource type="Texture2D" uid="uid://d1mktxqj42xi7" path="res://Resources/Atlases/crop.tres" id="18_bg3bw"]
 [ext_resource type="Texture2D" uid="uid://c748f7osdfele" path="res://Resources/Atlases/critter.tres" id="19_tw03e"]
+[ext_resource type="AudioStream" uid="uid://bl7bqwsrqxplg" path="res://Sound/Music/Mainmusicõige.ogg" id="20_phf5y"]
+[ext_resource type="AudioStream" uid="uid://wiwfvcmtk4t6" path="res://Sound/SFX/Gameoversound.wav" id="21_jlg7n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3wb3w"]
 texture = ExtResource("3_35oe8")
@@ -116,6 +117,7 @@ tile_map_data = PackedByteArray("AAD9/wIAAAABAAAAAAD+/wIAAAABAAAAAAD9/wEAAAABAAA
 tile_set = ExtResource("1_2lugi")
 
 [node name="Borders" type="TileMapLayer" parent="TileMap"]
+tile_map_data = PackedByteArray("AAD9/wEAAAACAAQAAAD9/wIAAAACAAQAAAD8/wAAAAAFAAQAAAD7/wAAAAAFAAQAAAD6/wEAAAADAAQAAAD6/wIAAAADAAQAAAABAAEAAAADAAQAAAABAAIAAAADAAQAAAAEAAEAAAACAAQAAAAEAAIAAAACAAQAAAD7/wMAAAAEAAQAAAD8/wMAAAAEAAQAAAADAAMAAAAEAAQAAAACAAMAAAAEAAQAAAABAAMAAAAGAAUAAAD6/wMAAAAGAAUAAAD9/wAAAAAEAAUAAAAEAAAAAAAEAAUAAAADAAAAAAAFAAQAAAACAAAAAAAFAAQAAAABAAAAAAAFAAUAAAD6/wAAAAAFAAUAAAD9/wMAAAADAAUAAAAEAAMAAAADAAUAAAA=")
 tile_set = ExtResource("1_2lugi")
 
 [node name="Grass" type="TileMapLayer" parent="TileMap"]
@@ -219,8 +221,10 @@ horizontal_alignment = 1
 script = ExtResource("13_sfrhc")
 
 [node name="Game End" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Node2D" type="Node2D" parent="Game End"]
+position = Vector2(0, 800)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Game End/Node2D"]
 position = Vector2(-871, -698)
@@ -284,7 +288,7 @@ stretch_mode = 1
 
 [node name="Label" type="Label" parent="Game End/Node2D/VBoxContainer/Coins Earned"]
 layout_mode = 2
-text = "CROPS COLLECTED: "
+text = "COINS EARNED: "
 
 [node name="Critters Kicked" type="HBoxContainer" parent="Game End/Node2D/VBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
@@ -313,8 +317,12 @@ text = "RETRY"
 [node name="Music" type="Node" parent="."]
 
 [node name="SlowBG" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource("15_xswk2")
+stream = ExtResource("20_phf5y")
 autoplay = true
+bus = &"Music"
+
+[node name="GameOver" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("21_jlg7n")
 bus = &"Music"
 
 [node name="Ambience" type="AudioStreamPlayer" parent="."]

@@ -10,6 +10,8 @@ var total_money : int = 0
 var total_crops : int = 0
 var kicked : int = 0
 
+var main_stage
+
 var money_time_multiplier : float = 0.1
 
 var money_change_label : PackedScene = preload("res://Scenes/GUI/money_change_label.tscn")
@@ -67,19 +69,7 @@ func _process(delta: float) -> void:
 		creatures_director.nr_of_creatures_per_wave = 4
 
 func _init_game_over():
-	var t =	$"Game End/Node2D/VBoxContainer/Time Survived/Label".text + str(ceili(total_time)) + " seconds"
-	$"Game End/Node2D/VBoxContainer/Time Survived/Label".text = t
-	t = $"Game End/Node2D/VBoxContainer/Crops Collected/Label".text + str(total_crops)
-	$"Game End/Node2D/VBoxContainer/Crops Collected/Label".text = t
-	t = $"Game End/Node2D/VBoxContainer/Critters Kicked/Label".text + str(kicked)
-	$"Game End/Node2D/VBoxContainer/Critters Kicked/Label".text = t
-	
-	$"Game End".visible = true
-	HUD.visible = false
-	
-	var tween : Tween  = $"Game End/Node2D".create_tween()
-	tween.tween_property($"Game End/Node2D", "position:y", 0, 3)\
-	.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	main_stage._game_over()
 
 func _init_shop_tiles() -> void:
 	for cell : CellData in soil_tml.grid_data.values():
@@ -126,4 +116,5 @@ func init_game() -> void:
 	total_money = 0
 	total_crops = 0
 	game_started = true
+	remaining_time = 60
 	_init_shop_tiles()
