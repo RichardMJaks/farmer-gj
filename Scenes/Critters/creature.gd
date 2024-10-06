@@ -22,7 +22,8 @@ func _create_entry_tween() -> Tween:
 func _process(_delta: float) -> void:
 	if cell_data.is_dead() and not is_ded:
 		is_ded = true
-		cell_data.stage = 3
+		if cell_data.health <= 0:
+			cell_data.stage = 3
 		_leave()
 	
 	move_and_slide()
@@ -42,6 +43,7 @@ func _attack() -> void:
 
 func _hit() -> void:
 	cell_data.take_damage()
+	
 	
 func get_kicked(c : CharacterBody2D) -> void:
 	is_ded = true

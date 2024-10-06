@@ -12,7 +12,7 @@ extends CharacterBody2D
 
 var held_crop : Seed
 var actionable_tile : CellData
-var kick_tile : CellData
+var kick_creature : Creature
 
 var held_money : int = 0
 var held_crops : int = 0
@@ -44,12 +44,12 @@ func _action() -> void:
 
 #TODO: Action: Hitting
 func _attack() -> void:
-	kick_tile = actionable_tile
+	kick_creature = actionable_tile.creature
 	state_machine.set_state("kicking")
 	
 func _hit() -> void:
-	kick_tile.creature.get_kicked(self)
-	kick_tile = null
+	kick_creature.get_kicked(self)
+	kick_creature = null
 
 #TODO Action: planting
 func _plant() -> void:
@@ -74,6 +74,8 @@ func _buy() -> void:
 	add_child(inst)
 	inst.stop_price_display()
 	inst.position = Vector2.UP * 20
+	
+	get_tree().create_timer(3).timeout.connect(GameMaster._add_seed_to_shop_cell.bind(actionable_tile))
 
 func _sell() -> void:
 	GameMaster.add_money(held_money)
@@ -113,7 +115,7 @@ func _get_actionable_tile() -> CellData:
 	
 	if potential_actionable_tile.is_shop:
 		if potential_actionable_tile.price <= GameMaster.money\
-		and potential_actionable_tile.seed:
+		and potential_actionable_tile.seed and not held_crop:
 			return _set_actionable_tile(potential_actionable_tile)
 		return null
 	

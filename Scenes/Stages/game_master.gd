@@ -8,6 +8,15 @@ var shop_tiles : Array[CellData] = []
 var total_money : int = 0
 var total_crops : int = 0
 
+var money_time_multiplier : float = 0.165
+
+var money_change_label : PackedScene = preload("res://Scenes/GUI/money_change_label.tscn")
+
+var HUD : CanvasLayer
+
+var total_time : float = 0
+var remaining_time : float = 60
+
 var seeds : Dictionary = {
 	"wheat" : preload("res://Scenes/Plants/Seeds/wheat_seed.tscn"),
 	"pumpkin" : preload("res://Scenes/Plants/Seeds/pumpkin_seed.tscn"),
@@ -36,6 +45,9 @@ var crops : Dictionary = {
 func _process(delta: float) -> void:
 	if not game_started:
 		return
+		
+	total_time += delta
+	remaining_time -= delta
 
 func _init_shop_tiles() -> void:
 	for cell : CellData in soil_tml.grid_data.values():
@@ -63,12 +75,19 @@ func _instantiate_display_seed(seed : String, cell_data : CellData) -> Seed:
 func add_money(amount : int) -> void:
 	money += amount
 	total_money += amount
+	remaining_time *= 1 + amount * money_time_multiplier
+	show_money_change(amount)
 
 func remove_money(amount : int) -> void:
-	money -= money
+	money -= amount
+	show_money_change(-amount)
 	
 func show_money_change(amount : int) -> void:
-	pass
+	var inst : Label = money_change_label.instantiate()
+	inst.text = ("+" if amount > 0 else "") + str(amount)
+	inst.position = Vector2(105, 65)
+	HUD.add_child(inst)
+	
 
 func init_game() -> void:
 	money = 5

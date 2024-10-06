@@ -4,4 +4,10 @@
 
 [node name="Wheat" instance=ExtResource("1_k1itb")]
 start_frame = 12
-value = 2
+value = 3
+
+[node name="Sprite" parent="." index="0"]
+frame = 12
+
+[node name="NextStageTimer" parent="." index="1"]
+wait_time = 7.0

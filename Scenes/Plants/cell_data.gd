@@ -26,18 +26,20 @@ func take_damage() -> void:
 	crop.take_damage()
 
 func harvest() -> int:
-	if stage == 2:
-		return crop.harvest()
-	if stage > 2:
-		crop.harvest()
+	var measure_stage = stage
 	
 	stage = 0
 	planted_crop = ""
 	health = 3
+	
+	if measure_stage == 2:
+		return crop.harvest()
+	else:
+		crop.harvest()
 	return 0
 
 func buy(player : CharacterBody2D) -> Seed:
-	GameMaster.money -= price
+	GameMaster.remove_money(price)
 	seed.display_price = false
 	player.held_crop = seed
 	

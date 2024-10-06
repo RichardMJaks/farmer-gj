@@ -21,8 +21,8 @@ GameMaster="*res://Scenes/Stages/game_master.gd"
 
 [display]
 
-window/size/viewport_width=648
-window/size/viewport_height=1152
+window/size/viewport_width=600
+window/size/viewport_height=800
 
 [editor_plugins]
 

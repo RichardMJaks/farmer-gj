@@ -4,4 +4,7 @@
 
 [node name="Eggplant" instance=ExtResource("1_uvuwq")]
 start_frame = 8
-value = 2
+value = 10
+
+[node name="NextStageTimer" parent="." index="1"]
+wait_time = 20.0
