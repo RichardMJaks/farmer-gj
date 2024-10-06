@@ -10,7 +10,7 @@ var cell_data
 
 var harvesting : bool = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if harvesting:
 		return
 	sprite.frame = start_frame + cell_data.stage
@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 func harvest() -> int:
 	harvesting = true
 	anim.play("harvest")
-	anim.animation_finished.connect(queue_free)
+	anim.animation_finished.connect(queue_free.unbind(1))
 	return value
 
 func take_damage() -> void:

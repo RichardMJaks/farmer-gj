@@ -13,6 +13,8 @@ func set_creature(c : Creature) -> void:
 	creature = c
 
 func take_damage() -> void:
+	if not crop:
+		return
 	health -= 1
 	crop.take_damage()
 

@@ -1,7 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://bk3volyh844lb"]
+[gd_scene load_steps=23 format=3 uid="uid://bk3volyh844lb"]
 
 [ext_resource type="Texture2D" uid="uid://0dptjoslh7nb" path="res://Art/farmer.png" id="1_5wneu"]
 [ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_v2qtl"]
+[ext_resource type="Script" path="res://Scenes/Player/state_machine.gd" id="3_1j0ww"]
+[ext_resource type="AudioStream" uid="uid://bo56jg25g1mt5" path="res://Sound/SFX/Steps/step_2.ogg" id="4_q165p"]
+[ext_resource type="AudioStream" uid="uid://6vr783j6uchq" path="res://Sound/SFX/Steps/step_3.ogg" id="5_u30uj"]
+[ext_resource type="AudioStream" uid="uid://d146874hcn0he" path="res://Sound/SFX/Steps/step_4.ogg" id="6_xp8sd"]
+[ext_resource type="AudioStream" uid="uid://ccd1hr8viuqvn" path="res://Sound/SFX/Steps/step_5.ogg" id="7_j3e06"]
+[ext_resource type="AudioStream" uid="uid://ddouynsn6fkbx" path="res://Sound/SFX/Steps/step_6.ogg" id="8_k603k"]
+[ext_resource type="AudioStream" uid="uid://byivw4p1tc6wl" path="res://Sound/SFX/Steps/step_1.ogg" id="9_8vf3t"]
+[ext_resource type="AudioStream" uid="uid://bi31riw7oc0ef" path="res://Sound/SFX/Planting/Külvamine1.wav" id="10_trn76"]
+[ext_resource type="AudioStream" uid="uid://bp7p1ovbcesmu" path="res://Sound/SFX/Planting/Külvamine2.wav" id="11_8xqei"]
+[ext_resource type="AudioStream" uid="uid://dfmbb2caaxapl" path="res://Sound/SFX/Planting/Külvamine3.wav" id="12_hql53"]
+[ext_resource type="AudioStream" uid="uid://77ymac6jxua3" path="res://Sound/SFX/Planting/Korjamine(harvesting)1.wav" id="13_fllan"]
+[ext_resource type="AudioStream" uid="uid://b7vxtt0t3wovu" path="res://Sound/SFX/Kick1.wav" id="14_b8ynp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3s0a"]
 size = Vector2(16, 16)
@@ -11,7 +23,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:position")
+tracks/0/path = NodePath("Marker2D/Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -23,7 +35,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:rotation")
+tracks/1/path = NodePath("Marker2D/Sprite:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -35,7 +47,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite:scale")
+tracks/2/path = NodePath("Marker2D/Sprite:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -43,6 +55,30 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Audio/Steps:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Audio/Kicking:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_na5qj"]
@@ -53,7 +89,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:scale")
+tracks/0/path = NodePath("Marker2D/Sprite:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -65,7 +101,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:position")
+tracks/1/path = NodePath("Marker2D/Sprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -77,7 +113,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite:rotation")
+tracks/2/path = NodePath("Marker2D/Sprite:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -94,7 +130,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:position")
+tracks/0/path = NodePath("Marker2D/Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -106,7 +142,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:rotation")
+tracks/1/path = NodePath("Marker2D/Sprite:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -118,7 +154,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite:scale")
+tracks/2/path = NodePath("Marker2D/Sprite:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -127,18 +163,119 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Audio/Steps:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+
+[sub_resource type="Animation" id="Animation_tkn6m"]
+resource_name = "kick"
+length = 0.65
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Marker2D/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.3, 0.433333, 0.65),
+"transitions": PackedFloat32Array(0.406126, 3.4822, 0.615572, 0.68302, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-2, 1), Vector2(2, -1), Vector2(2, 1.5), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Marker2D/Sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.3, 0.433333, 0.65),
+"transitions": PackedFloat32Array(0.406126, 3.4822, 0.615572, 0.68302, 1),
+"update": 0,
+"values": [0.0, 0.174533, -0.349066, -0.401426, 0.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_hit"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StateMachine")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.65),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"set_state_none"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Audio/Kicking:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3rmo8"]
 _data = {
 "RESET": SubResource("Animation_bnte4"),
 "idle": SubResource("Animation_na5qj"),
+"kick": SubResource("Animation_tkn6m"),
 "walking": SubResource("Animation_3ope6")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_bvxb7"]
+streams_count = 6
+stream_0/stream = ExtResource("4_q165p")
+stream_1/stream = ExtResource("5_u30uj")
+stream_2/stream = ExtResource("6_xp8sd")
+stream_3/stream = ExtResource("7_j3e06")
+stream_4/stream = ExtResource("8_k603k")
+stream_5/stream = ExtResource("9_8vf3t")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dsyhp"]
+streams_count = 3
+stream_0/stream = ExtResource("10_trn76")
+stream_1/stream = ExtResource("11_8xqei")
+stream_2/stream = ExtResource("12_hql53")
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_v2qtl")
+speed = 50.0
+acceleration_time = 0.2
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="Marker2D"]
 texture = ExtResource("1_5wneu")
 vframes = 2
 
@@ -151,3 +288,24 @@ libraries = {
 "": SubResource("AnimationLibrary_3rmo8")
 }
 autoplay = "idle"
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_1j0ww")
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Steps" type="AudioStreamPlayer" parent="Audio"]
+stream = SubResource("AudioStreamRandomizer_bvxb7")
+volume_db = 10.306
+pitch_scale = 2.04
+bus = &"Stepping"
+
+[node name="Planting" type="AudioStreamPlayer" parent="Audio"]
+stream = SubResource("AudioStreamRandomizer_dsyhp")
+bus = &"Planting"
+
+[node name="Harvesting" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("13_fllan")
+
+[node name="Kicking" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("14_b8ynp")

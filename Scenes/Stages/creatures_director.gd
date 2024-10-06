@@ -8,7 +8,6 @@ extends Node2D
 #TODO: Director algorithm
 #TODO: Difficulty curve
 func _summon_creature() -> void:
-	print("summoning")
 	var cell_data : CellData = _select_random_plant()
 	if not cell_data:
 		return

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dvt252oviwqwa"
+path="res://.godot/imported/Birdscreech2.wav-c7a77766823313bf014709fa6aa8ac0b.sample"
+
+[deps]
+
+source_file="res://Sound/SFX/Bird Screech/Birdscreech2.wav"
+dest_files=["res://.godot/imported/Birdscreech2.wav-c7a77766823313bf014709fa6aa8ac0b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

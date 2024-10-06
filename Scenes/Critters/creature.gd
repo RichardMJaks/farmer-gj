@@ -17,7 +17,7 @@ func _create_entry_tween() -> Tween:
 	
 	return tween
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if cell_data.is_dead() and not is_ded:
 		is_ded = true
 		cell_data.stage = 3

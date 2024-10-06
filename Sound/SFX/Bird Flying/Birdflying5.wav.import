@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bofmiwuhhh7pq"
+path="res://.godot/imported/Birdflying5.wav-6ac643fc92f7d8fbd652c840d7a22194.sample"
+
+[deps]
+
+source_file="res://Sound/SFX/Bird Flying/Birdflying5.wav"
+dest_files=["res://.godot/imported/Birdflying5.wav-6ac643fc92f7d8fbd652c840d7a22194.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

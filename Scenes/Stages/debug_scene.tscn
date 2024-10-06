@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://bwk1hm43ba04s"]
+[gd_scene load_steps=5 format=4 uid="uid://bwk1hm43ba04s"]
 
 [ext_resource type="TileSet" uid="uid://dan6cuo8k8ug7" path="res://Resources/Tilesets/environment.tres" id="1_oapgg"]
 [ext_resource type="PackedScene" uid="uid://d1yiolra5ob08" path="res://Scenes/Plants/soil.tscn" id="2_42g5v"]
 [ext_resource type="PackedScene" uid="uid://bk3volyh844lb" path="res://Scenes/Player/player.tscn" id="2_abcel"]
-[ext_resource type="Script" path="res://Scenes/Stages/creatures_director.gd" id="4_jjioe"]
-[ext_resource type="PackedScene" uid="uid://da5g6s70kykj7" path="res://Scenes/Critters/creature.tscn" id="5_46wn8"]
+[ext_resource type="PackedScene" uid="uid://c2t6ag7oofq0c" path="res://Scenes/Critters/creatures_director.tscn" id="4_qf766"]
 
 [node name="DebugScene" type="Node2D"]
 
@@ -27,15 +26,5 @@ zoom = Vector2(3, 3)
 
 [node name="Player" parent="." instance=ExtResource("2_abcel")]
 position = Vector2(3, -6)
-speed = 50.0
-acceleration_time = 0.2
 
-[node name="CreaturesDirector" type="Node2D" parent="."]
-script = ExtResource("4_jjioe")
-c_raven = ExtResource("5_46wn8")
-
-[node name="CreatureTimer" type="Timer" parent="CreaturesDirector"]
-wait_time = 7.0
-autostart = true
-
-[connection signal="timeout" from="CreaturesDirector/CreatureTimer" to="CreaturesDirector" method="_on_creature_timer_timeout"]
+[node name="CreaturesDirector" parent="." instance=ExtResource("4_qf766")]
