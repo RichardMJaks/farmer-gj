@@ -2,12 +2,6 @@ class_name SoilTileMapLayer
 extends TileMapLayer
 
 var grid_data : Dictionary = {}
-@onready var crops : Dictionary = {
-	"eggplant" : preload("res://Scenes/Plants/eggplant.tscn"),
-	"wheat" : preload("res://Scenes/Plants/wheat.tscn"),
-	"pumpkin" : preload("res://Scenes/Plants/pumpkin.tscn"),
-	"tomato" : preload("res://Scenes/Plants/tomato.tscn")
-}
 
 func _ready() -> void:
 	GameMaster.soil_tml = self

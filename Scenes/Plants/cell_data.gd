@@ -12,8 +12,7 @@ var stage = 0
 
 # Shop vars
 var is_shop : bool = false
-var seed : String = ""
-var seed_sprite : Sprite2D
+var seed : Seed
 var price : int = 0
 
 func set_creature(c : Creature) -> void:
@@ -34,6 +33,16 @@ func harvest() -> void:
 	stage = 0
 	planted_crop = ""
 	health = 3
+
+func buy(player : CharacterBody2D) -> Seed:
+	GameMaster.money -= price
+	seed.display_price = false
+	player.held_crop = seed
+	
+	var seed_ref = seed
+	seed = null
+	
+	return seed_ref
 
 func attackable() -> bool:
 	return (planted_crop != "") and (not has_creature) and (stage != 3) and (not is_shop)

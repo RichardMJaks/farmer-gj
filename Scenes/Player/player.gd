@@ -12,12 +12,13 @@ extends CharacterBody2D
 
 var held_crop : Seed
 var actionable_tile : CellData
+var kick_tile : CellData
 
 @onready var audio_planting : AudioStreamPlayer = $Audio/Planting
 @onready var audio_harvesting : AudioStreamPlayer = $Audio/Harvesting
 
 func _process(_delta: float) -> void:
-	_get_actionable_tile()
+	actionable_tile = _get_actionable_tile()
 	if Input.is_action_just_pressed("a_action"):
 		_action()
 	
@@ -27,7 +28,7 @@ func _action() -> void:
 	if actionable_tile.has_creature:
 		_attack()
 		return
-	if actionable_tile.is_shop:
+	if actionable_tile.is_shop and actionable_tile.price <= GameMaster.money and actionable_tile.seed:
 		_buy()
 		return
 	if actionable_tile.planted_crop == "" and held_crop:
@@ -37,16 +38,18 @@ func _action() -> void:
 
 #TODO: Action: Hitting
 func _attack() -> void:
+	kick_tile = actionable_tile
 	state_machine.set_state("kicking")
 	
 func _hit() -> void:
-	if not actionable_tile:
-		return
-	self.actionable_tile.creature.get_kicked(self)
+	kick_tile.creature.get_kicked(self)
+	kick_tile = null
 
 #TODO Action: planting
 func _plant() -> void:
 	soil_tml.plant(held_crop, actionable_tile)
+	held_crop.queue_free()
+	held_crop = null
 	audio_planting.play()
 
 func _harvest() -> void:
@@ -55,7 +58,11 @@ func _harvest() -> void:
 
 #TODO: Action: buying
 func _buy() -> void:
-	pass
+	var inst = actionable_tile.buy(self)
+	soil_tml.remove_child(inst)
+	add_child(inst)
+	inst.stop_price_display()
+	inst.position = Vector2.UP * 20
 
 #TODO: Add inventory?
 
@@ -84,13 +91,16 @@ func _get_actionable_tile() -> CellData:
 	if state_machine.state == "kicking":
 		return null
 	
-	var potential_actionable_tile = soil_tml.c_get_cell_data(soil_tml.local_to_map(position))
+	var potential_actionable_tile : CellData = soil_tml.c_get_cell_data(soil_tml.local_to_map(position))
 	
 	if not potential_actionable_tile:
 		return null
 	
 	if potential_actionable_tile.is_shop:
-		return _set_actionable_tile(potential_actionable_tile)
+		if potential_actionable_tile.price <= GameMaster.money\
+		and potential_actionable_tile.seed:
+			return _set_actionable_tile(potential_actionable_tile)
+		return null
 	
 	if potential_actionable_tile.has_creature:
 		return _set_actionable_tile(potential_actionable_tile)
@@ -98,12 +108,11 @@ func _get_actionable_tile() -> CellData:
 	if potential_actionable_tile.planted_crop != "" and potential_actionable_tile.stage > 1:
 		return _set_actionable_tile(potential_actionable_tile)
 	
-	if potential_actionable_tile.planted_crop == "" and held_crop != "":
+	if potential_actionable_tile.planted_crop == "" and held_crop:
 		return _set_actionable_tile(potential_actionable_tile)
 		
 	return null
 	
 func _set_actionable_tile(tile : CellData) -> CellData:
-	actionable_tile = tile
 	indicator_tml.move_indicator(tile.coords)
 	return tile
