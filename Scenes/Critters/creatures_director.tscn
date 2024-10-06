@@ -8,7 +8,7 @@ script = ExtResource("1_y46be")
 c_raven = ExtResource("2_anaft")
 
 [node name="CreatureTimer" type="Timer" parent="."]
-wait_time = 7.0
+wait_time = 15.0
 autostart = true
 
 [connection signal="timeout" from="CreatureTimer" to="." method="_on_creature_timer_timeout"]

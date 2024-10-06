@@ -7,7 +7,7 @@ var has_creature : bool = false
 var creature : Creature
 var planted_crop : String = ""
 var crop : Crop
-var health : int = 3
+var health : int = 1
 var stage = 0
 
 # Shop vars
@@ -30,7 +30,7 @@ func harvest() -> int:
 	
 	stage = 0
 	planted_crop = ""
-	health = 3
+	health = 1
 	
 	if measure_stage == 2:
 		return crop.harvest()

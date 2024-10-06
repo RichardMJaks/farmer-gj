@@ -87,7 +87,7 @@ vframes = 4
 [node name="Node" type="Node" parent="."]
 
 [node name="FirstStrikeTimer" type="Timer" parent="Node"]
-wait_time = 3.0
+wait_time = 5.0
 one_shot = true
 
 [node name="ExpirationTimer" type="Timer" parent="Node"]

@@ -5,6 +5,8 @@
 [ext_resource type="Theme" uid="uid://cmfiuoomtn5t6" path="res://Resources/Themes/basic_ui.tres" id="3_3c7ed"]
 
 [node name="Seed" type="Node2D"]
+z_index = 1
+z_as_relative = false
 script = ExtResource("1_w8bnp")
 
 [node name="Sprite" type="Sprite2D" parent="."]

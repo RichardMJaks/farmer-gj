@@ -3,6 +3,10 @@ extends Node2D
 @onready var soil_tml : SoilTileMapLayer = $"../TileMap/Soil"
 @export var c_raven : PackedScene
 
+func _ready() -> void:
+	GameMaster.creatures_director = self
+
+var nr_of_creatures_per_wave = 1
 
 #TODO: make summoning choose randomly
 #TODO: Director algorithm
@@ -26,4 +30,5 @@ func _select_random_plant() -> CellData:
 	return cells.pick_random()
 
 func _on_creature_timer_timeout() -> void:
-	_summon_creature()
+	for i in range(0, nr_of_creatures_per_wave):
+		_summon_creature()

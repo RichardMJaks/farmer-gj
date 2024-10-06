@@ -17,7 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://b7vxtt0t3wovu" path="res://Sound/SFX/Kick1.wav" id="14_b8ynp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3s0a"]
-size = Vector2(16, 16)
+size = Vector2(9, 9)
 
 [sub_resource type="Animation" id="Animation_bnte4"]
 length = 0.001
@@ -291,6 +291,7 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_3ope6"]
 resource_name = "walking"
+length = 0.6
 loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
@@ -300,10 +301,10 @@ tracks/0/path = NodePath("Marker2D/Sprite:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
 "transitions": PackedFloat32Array(0.637281, 3.03143, 0.637281, 3, 0.637281),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(-1, -1), Vector2(0, 0), Vector2(1, -1), Vector2(0, 0)]
+"values": [Vector2(0, 0), Vector2(-1.5, -1.5), Vector2(0, 0), Vector2(1.5, -1.5), Vector2(0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -312,7 +313,7 @@ tracks/1/path = NodePath("Marker2D/Sprite:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
 "transitions": PackedFloat32Array(0.637281, 3.03143, 0.637281, 3, 0.637281),
 "update": 0,
 "values": [0.0, -0.0872665, 0.0, 0.0872665, 0.0]
@@ -336,7 +337,7 @@ tracks/3/path = NodePath("Audio/Steps:playing")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, true]
@@ -367,7 +368,7 @@ stream_2/stream = ExtResource("12_hql53")
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_v2qtl")
-speed = 65.0
+speed = 70.0
 acceleration_time = 0.2
 
 [node name="Marker2D" type="Marker2D" parent="."]
@@ -385,6 +386,7 @@ rotation = 1.30469
 texture = ExtResource("3_2rjws")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 3.5)
 shape = SubResource("RectangleShape2D_m3s0a")
 metadata/_edit_lock_ = true
 

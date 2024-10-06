@@ -24,6 +24,7 @@ func _process(_delta: float) -> void:
 		is_ded = true
 		if cell_data.health <= 0:
 			cell_data.stage = 3
+			GameMaster.remaining_time -= 5
 		_leave()
 	
 	move_and_slide()
@@ -49,6 +50,7 @@ func get_kicked(c : CharacterBody2D) -> void:
 	is_ded = true
 	$Node/FirstStrikeTimer.stop()
 	var dir : Vector2 = (global_position - c.global_position).normalized()
+	get_tree().current_scene.get_node("Camera2D").shake(dir)
 	velocity = dir * 200
 	anim.play("get_kicked")
 	cell_data.has_creature = false
