@@ -5,6 +5,9 @@ var soil_tml : SoilTileMapLayer
 var game_started : bool = false
 var shop_tiles : Array[CellData] = []
 
+var total_money : int = 0
+var total_crops : int = 0
+
 var seeds : Dictionary = {
 	"wheat" : preload("res://Scenes/Plants/Seeds/wheat_seed.tscn"),
 	"pumpkin" : preload("res://Scenes/Plants/Seeds/pumpkin_seed.tscn"),
@@ -57,8 +60,19 @@ func _instantiate_display_seed(seed : String, cell_data : CellData) -> Seed:
 	
 	return inst
 
+func add_money(amount : int) -> void:
+	money += amount
+	total_money += amount
+
+func remove_money(amount : int) -> void:
+	money -= money
+	
+func show_money_change(amount : int) -> void:
+	pass
 
 func init_game() -> void:
 	money = 5
+	total_money = 0
+	total_crops = 0
 	game_started = true
 	_init_shop_tiles()

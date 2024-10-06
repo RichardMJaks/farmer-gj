@@ -81,7 +81,7 @@ danger_arrow = ExtResource("2_yexxl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_6f28l")
-hframes = 3
+hframes = 4
 vframes = 4
 
 [node name="Node" type="Node" parent="."]

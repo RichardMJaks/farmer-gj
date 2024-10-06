@@ -14,6 +14,9 @@ var held_crop : Seed
 var actionable_tile : CellData
 var kick_tile : CellData
 
+var held_money : int = 0
+var held_crops : int = 0
+
 @onready var audio_planting : AudioStreamPlayer = $Audio/Planting
 @onready var audio_harvesting : AudioStreamPlayer = $Audio/Harvesting
 
@@ -30,6 +33,9 @@ func _action() -> void:
 		return
 	if actionable_tile.is_shop and actionable_tile.price <= GameMaster.money and actionable_tile.seed:
 		_buy()
+		return
+	if actionable_tile.is_sell and held_money > 0:
+		_sell()
 		return
 	if actionable_tile.planted_crop == "" and held_crop:
 		_plant()
@@ -54,7 +60,12 @@ func _plant() -> void:
 
 func _harvest() -> void:
 	audio_harvesting.play()
-	actionable_tile.harvest()	
+	var received : int = actionable_tile.harvest()
+	if received == 0:
+		return
+	
+	held_money += received
+	held_crops += 1
 
 #TODO: Action: buying
 func _buy() -> void:
@@ -64,7 +75,11 @@ func _buy() -> void:
 	inst.stop_price_display()
 	inst.position = Vector2.UP * 20
 
-#TODO: Add inventory?
+func _sell() -> void:
+	GameMaster.add_money(held_money)
+	GameMaster.total_crops += held_crops
+	held_money = 0
+	held_crops = 0
 
 func _physics_process(_delta: float) -> void:
 	var h_dir : float = Input.get_axis("m_left", "m_right")
@@ -102,6 +117,12 @@ func _get_actionable_tile() -> CellData:
 			return _set_actionable_tile(potential_actionable_tile)
 		return null
 	
+	if potential_actionable_tile.is_sell:
+		if not held_money == 0:
+			return _set_actionable_tile(potential_actionable_tile)
+		else:
+			return null
+
 	if potential_actionable_tile.has_creature:
 		return _set_actionable_tile(potential_actionable_tile)
 	

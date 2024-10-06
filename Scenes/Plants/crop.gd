@@ -1,7 +1,7 @@
 class_name Crop
 extends Node2D
 
-var cell_data
+var cell_data : CellData
 @export var start_frame : int
 @export var value : int = 0
 
@@ -20,6 +20,8 @@ func _process(_delta: float) -> void:
 #TODO: Earning money, buying seeds
 func harvest() -> int:
 	harvesting = true
+	cell_data.planted_crop = ""
+	cell_data.crop = null
 	anim.play("harvest")
 	anim.animation_finished.connect(queue_free.unbind(1))
 	return value

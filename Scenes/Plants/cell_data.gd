@@ -14,6 +14,7 @@ var stage = 0
 var is_shop : bool = false
 var seed : Seed
 var price : int = 0
+var is_sell : bool = false
 
 func set_creature(c : Creature) -> void:
 	creature = c
@@ -24,15 +25,16 @@ func take_damage() -> void:
 	health -= 1
 	crop.take_damage()
 
-func harvest() -> void:
+func harvest() -> int:
 	if stage == 2:
-		GameMaster.money += crop.harvest()
+		return crop.harvest()
 	if stage > 2:
 		crop.harvest()
 	
 	stage = 0
 	planted_crop = ""
 	health = 3
+	return 0
 
 func buy(player : CharacterBody2D) -> Seed:
 	GameMaster.money -= price

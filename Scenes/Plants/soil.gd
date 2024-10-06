@@ -12,6 +12,8 @@ func _ready() -> void:
 		grid_data[cell] = cell_data
 		if get_cell_atlas_coords(cell) == Vector2i(1, 2):
 			cell_data.is_shop = true
+		if get_cell_atlas_coords(cell) == Vector2i(0, 2):
+			cell_data.is_sell = true
 
 func get_attackable_cells() -> Array[CellData]:
 	var cell_datas = grid_data.values()
