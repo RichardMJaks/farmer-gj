@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdy150t1egnyj"]
+
+[ext_resource type="TileSet" uid="uid://bet1retjmissw" path="res://Resources/Tilesets/soil.tres" id="1_yig6y"]
+[ext_resource type="Script" path="res://ETML Data Structure/ETML Subclasses/shop_etml.gd" id="2_6xvgd"]
+[ext_resource type="Script" path="res://Scripts/Misc/shop_manager.gd" id="3_8ibqr"]
+
+[node name="ShopETML" type="TileMapLayer"]
+tile_map_data = PackedByteArray(0, 0, 255, 255, 249, 255, 0, 0, 1, 0, 2, 0, 0, 0, 0, 0, 249, 255, 0, 0, 1, 0, 2, 0, 0, 0)
+tile_set = ExtResource("1_yig6y")
+script = ExtResource("2_6xvgd")
+
+[node name="ShopManager" type="Node2D" parent="."]
+script = ExtResource("3_8ibqr")

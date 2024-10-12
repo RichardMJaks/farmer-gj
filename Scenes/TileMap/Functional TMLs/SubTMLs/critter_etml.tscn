@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbwwbm08qos5x"]
+
+[ext_resource type="Script" path="res://ETML Data Structure/ETML Subclasses/critter_etml.gd" id="1_s6k3r"]
+
+[node name="CritterETML" type="TileMapLayer"]
+script = ExtResource("1_s6k3r")

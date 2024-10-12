@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://1j8qgpqiltcx"]
+
+[ext_resource type="PackedScene" uid="uid://63fgvxcjcois" path="res://Scenes/Crop/Deprecated/Seeds/seed.tscn" id="1_waaii"]
+[ext_resource type="PackedScene" uid="uid://dci3x1fldge0e" path="res://Scenes/Crop/Deprecated/eggplant.tscn" id="2_ii2by"]
+
+[node name="Seed" instance=ExtResource("1_waaii")]
+seed_name = "eggplant"
+crop = ExtResource("2_ii2by")

@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://ooxos50p17rd"]
+
+[ext_resource type="Texture2D" uid="uid://d0xf1645rmrgn" path="res://Art/Misc/indicator.png" id="1_w700r"]
+[ext_resource type="Script" path="res://Scripts/Misc/indicator_tml.gd" id="2_ghqvh"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t7vsj"]
+texture = ExtResource("1_w700r")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_11i47"]
+sources/0 = SubResource("TileSetAtlasSource_t7vsj")
+
+[node name="IndicatorTML" type="TileMapLayer"]
+tile_set = SubResource("TileSet_11i47")
+script = ExtResource("2_ghqvh")

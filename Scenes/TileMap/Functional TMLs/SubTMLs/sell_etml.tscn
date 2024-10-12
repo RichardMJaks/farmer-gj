@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://gco0soe3jeu1"]
+
+[ext_resource type="TileSet" uid="uid://bet1retjmissw" path="res://Resources/Tilesets/soil.tres" id="1_y8fuy"]
+[ext_resource type="Script" path="res://ETML Data Structure/ETML Subclasses/sell_etml.gd" id="2_5vtfy"]
+
+[node name="SellETML" type="TileMapLayer"]
+tile_map_data = PackedByteArray(0, 0, 255, 255, 4, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 2, 0, 0, 0)
+tile_set = ExtResource("1_y8fuy")
+script = ExtResource("2_5vtfy")

@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://cmfiuoomtn5t6" path="res://Resources/Themes/basic_ui.tres" id="1_lyj4c"]
 [ext_resource type="Texture2D" uid="uid://d1maeur3rseo2" path="res://Screenshot 2024-10-05 224531.png" id="2_bsx1r"]
 [ext_resource type="AudioStream" uid="uid://c868xb46b8124" path="res://Sound/Music/Menuõige.ogg" id="4_25yyt"]
-[ext_resource type="Texture2D" uid="uid://ugtodcuqecr" path="res://Art/ui.png" id="4_h7xwi"]
+[ext_resource type="Texture2D" uid="uid://ugtodcuqecr" path="res://Art/Spritesheets/ui.png" id="4_h7xwi"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n40ar"]
 texture = ExtResource("2_bsx1r")

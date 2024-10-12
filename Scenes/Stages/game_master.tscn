@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddjsuhntgdsgp"]
-
-[ext_resource type="Script" path="res://Scenes/Stages/game_master.gd" id="1_tyo8o"]
-
-[node name="GameMaster" type="Node"]
-script = ExtResource("1_tyo8o")
