@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bgn5v3bxcm8rn"]
 
-[ext_resource type="PackedScene" uid="uid://cxp4kuxpl2mmx" path="res://Scenes/Crop/Deprecated/crop.tscn" id="1_k2c5a"]
+[ext_resource type="PackedScene" uid="uid://cxp4kuxpl2mmx" path="res://Scenes/Crop/crop.tscn" id="1_k2c5a"]
 
 [node name="Pumpkin" instance=ExtResource("1_k2c5a")]
 start_frame = 4

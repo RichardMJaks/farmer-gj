@@ -6,9 +6,15 @@ func _set_cell_type() -> void:
 	
 #TODO: Implement set_crop()
 func set_crop(coords : Vector2i, crop : Crop) -> ShopCell:
-	return null
+	if not crop:
+		push_error("No crop!")
+		return null
 	
-#TODO: Implement buy_crop()
-func buy_crop(coords : Vector2i) -> Crop:
-	return null
+	var cell : ShopCell = cells[coords]
+	cell.set_crop(crop)
+	
+	add_child(crop)
+	crop.global_position = owner.map_to_local(coords)
+	
+	return cell
 	

@@ -2,6 +2,7 @@ class_name Cell
 extends Node
 
 var _coords : Vector2i
+var _tml : ExtendedTileMapLayer
 
 func set_coords(coords : Vector2i) -> Vector2i:
 	_coords = coords

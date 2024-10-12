@@ -1,10 +1,14 @@
 extends CharacterBody2D
 
+#TODO: Add single crop at a time
+
 @export var speed : float
 @export var acceleration_time : float
 
 @onready var state_machine : Node = $StateMachine
-@onready var sprite_marker : Marker2D = $Marker2D
+@onready var sprite_marker : Marker2D = $Sprite
+
+@onready var crop_position : Vector2 = $CropPosition.position
 
 # IndicatorTML will set it itself
 var indicator_tml : TileMapLayer = null
@@ -62,18 +66,27 @@ func _context_action() -> void:
 			_context_creature()
 
 func _context_creature() -> void:
-	print("Creature")
+	print_debug("Creature")
 
 func _context_shop() -> void:
-	print("Shop")
+	var crop = targeted_cell.buy_crop()
+	
+	if not crop:
+		print_debug("failed buy")
+		return
+	
+	add_child(crop)
+	crop.position = crop_position
+	
+	print_debug("Shop")
 
 func _context_sell() -> void:
-	print("Sell")
+	print_debug("Sell")
 
 func _context_crop() -> void:
-	print("Crop")
+	print_debug("Crop")
 
 func _context_soil() -> void:
-	print("Soil")
+	print_debug("Soil")
 
 #endregion	
