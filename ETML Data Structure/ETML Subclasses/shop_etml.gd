@@ -4,7 +4,7 @@ extends ExtendedTileMapLayer
 func _set_cell_type() -> void:
 	_cell_type = ShopCell
 	
-#TODO: Implement set_crop()
+#TODO: Implement set_crop() (is this even required?)
 func set_crop(coords : Vector2i, crop : Crop) -> ShopCell:
 	if not crop:
 		push_error("No crop!")

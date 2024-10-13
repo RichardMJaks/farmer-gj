@@ -4,8 +4,9 @@ extends Cell
 var _crop : Crop = null
 
 # Great to 
-signal bought_crop(coords)
+signal bought_crop(cell : ShopCell)
 
+#TODO: Requires shop_mgr, figure out later
 func set_crop(crop : Crop) -> Crop:
 	_crop = crop
 	GM.shop_etml.add_child(_crop)
@@ -33,7 +34,7 @@ func buy_crop() -> Crop:
 	
 	_crop = null
 	
-	bought_crop.emit(_coords)
+	bought_crop.emit(self)
 	
 	var fstring = "Bought %s at %s for %d"
 	print_debug(fstring % [crop, _coords, crop.price])
