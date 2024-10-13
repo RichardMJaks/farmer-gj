@@ -12,6 +12,7 @@ var shop_mgr : Node2D
 
 var crop : PackedScene = preload("res://Scenes/Crop/crop.tscn")
 
+#TODO: When crop_pool[] is updated, update it in shop_mgr also
 var crop_pool : Array[String] = [
 	"wheat"
 ]

@@ -16,6 +16,9 @@ func _ready() -> void:
 		var cell : Cell = _cell_type.new()
 		cell.set_coords(cell_coords)
 		cells[cell_coords] = cell
+		add_child(cell)
+		cell.position = map_to_local(cell_coords)
+	
 
 #HACK: We use this function because you cannot change parent class vars in inheriting classes
 func _set_cell_type() -> void:

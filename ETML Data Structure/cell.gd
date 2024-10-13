@@ -1,5 +1,5 @@
 class_name Cell
-extends Node
+extends Node2D
 
 var _coords : Vector2i
 var _tml : ExtendedTileMapLayer

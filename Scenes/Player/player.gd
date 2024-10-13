@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var sprite_marker : Marker2D = $Sprite
 
 @onready var crop_position : Vector2 = $CropPosition.position
+var _crop : Crop
 
 # IndicatorTML will set it itself
 var indicator_tml : TileMapLayer = null
@@ -75,11 +76,10 @@ func _context_shop() -> void:
 		print_debug("failed buy")
 		return
 	
-	add_child(crop)
-	crop.position = crop_position
+	_add_crop(crop)
+	_crop.position = crop_position
 	
-	print_debug("Shop")
-
+	
 func _context_sell() -> void:
 	print_debug("Sell")
 
@@ -87,6 +87,13 @@ func _context_crop() -> void:
 	print_debug("Crop")
 
 func _context_soil() -> void:
-	print_debug("Soil")
-
+	remove_child(_crop)
+	targeted_cell.set_crop(_crop)
+	_crop = null
 #endregion	
+
+#region Helper functions
+func _add_crop(crop : Crop) -> void:
+	_crop = crop
+	add_child(_crop)
+#endregion

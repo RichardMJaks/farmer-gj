@@ -9,11 +9,11 @@ signal bought_crop(cell : ShopCell)
 #TODO: Requires shop_mgr, figure out later
 func set_crop(crop : Crop) -> Crop:
 	_crop = crop
-	GM.shop_etml.add_child(_crop)
+	add_child(_crop)
 	
 	_crop.change_state(Crop.STATE_BUYABLE)
 	
-	_crop.global_position = GM.shop_etml.map_to_local(_coords)
+	_crop.global_position = global_position
 	
 	return _crop
 	
@@ -30,7 +30,7 @@ func buy_crop() -> Crop:
 	#TODO: Implement prices
 	
 	crop.change_state(Crop.STATE_CARRIED)
-	GM.shop_etml.remove_child(crop)
+	remove_child(crop)
 	
 	_crop = null
 	
