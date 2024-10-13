@@ -32,8 +32,9 @@ func set_crop(crop : Crop) -> Crop:
 func _harvest() -> int:
 	print_debug("harvesting")
 	var crop_value = _crop.harvest()
-	GM.add_coins(crop_value)
-	return 0
+	var earned_coins = GM.add_uncollected_coins(crop_value)
+	GM.crops += 1
+	return earned_coins
 
 func get_crop() -> Crop:
 	return _crop

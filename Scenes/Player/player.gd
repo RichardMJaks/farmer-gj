@@ -79,9 +79,9 @@ func _context_shop() -> void:
 	_add_crop(crop)
 	_crop.position = crop_position
 	
-	
+#TODO: Sell flair
 func _context_sell() -> void:
-	print_debug("Sell")
+	GM.collect_coins()
 
 func _context_crop() -> void:
 	print_debug("Crop")
