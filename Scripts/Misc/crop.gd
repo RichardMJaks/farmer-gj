@@ -10,13 +10,14 @@ extends Node2D
 var _cell : SoilCell 
 
 # Planted variables
-var _stage_growth_time : float
-var _stage : int
+@export var _stage_growth_time : float = 1
+var _stage : int = 0
 var _harvestable : bool = false
 
-# Buyable variables
-var price : int = 0
-var icon : Resource
+# Price stuff
+@export var price : int = 0
+@export var _value : int = 0
+var icon : Resource # Is this necessary?
 
 # States mostly apply to how crop appears
 var state = STATE_BUYABLE
@@ -36,7 +37,8 @@ func _process(_delta: float) -> void:
 
 #TODO: Add harvest() functionality
 func harvest() -> int:
-	return -1
+	queue_free()
+	return _value
 
 #TODO: Add take_damage() functionality
 func take_damage() -> void:

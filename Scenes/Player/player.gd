@@ -88,7 +88,7 @@ func _context_crop() -> void:
 
 func _context_soil() -> void:
 	remove_child(_crop)
-	targeted_cell.set_crop(_crop)
+	targeted_cell.action(_crop)
 	_crop = null
 #endregion	
 
