@@ -12,4 +12,4 @@ func get_coords() -> Vector2i:
 	return _coords
 
 func get_type():
-	return "Cell"
+	return Cell
