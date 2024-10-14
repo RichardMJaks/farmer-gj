@@ -10,7 +10,7 @@ extends Node2D
 
 @onready var stage_timer : Timer = $StageTimer
 
-var _cell : SoilCell 
+var _cell : CropCell 
 
 # Planted variables
 @export var _stage_growth_time : float = 1
@@ -107,6 +107,7 @@ func rot() -> void:
 	_stage = 3
 	_value = 0
 	harvestable = true
+	_cell.rotted = true
 	stage_timer.stop()
 
 func _to_string() -> String:

@@ -42,4 +42,4 @@ func buy_crop() -> Crop:
 	return crop
 
 func get_type():
-	return "ShopCell"
+	return ShopCell

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://da5g6s70kykj7"]
 
-[ext_resource type="Texture2D" uid="uid://jgc4mks6l2nl" path="res://Art/Spritesheets/pesky creatures.png" id="1_6f28l"]
-[ext_resource type="Script" path="res://Scenes/Critters/critter.gd" id="1_7jhva"]
+[ext_resource type="Script" path="res://Scenes/Critters/critter.gd" id="1_5r4pq"]
+[ext_resource type="Texture2D" uid="uid://jgc4mks6l2nl" path="res://Art/Spritesheets/pesky creatures.png" id="2_5vtfh"]
 
 [sub_resource type="Animation" id="Animation_wxpyn"]
 length = 0.001
@@ -74,11 +74,11 @@ _data = {
 "hit": SubResource("Animation_w7jh3")
 }
 
-[node name="Creature" type="CharacterBody2D"]
-script = ExtResource("1_7jhva")
+[node name="Critter" type="CharacterBody2D"]
+script = ExtResource("1_5r4pq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_6f28l")
+texture = ExtResource("2_5vtfh")
 hframes = 4
 vframes = 4
 

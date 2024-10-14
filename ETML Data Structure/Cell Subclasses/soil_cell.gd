@@ -6,4 +6,4 @@ func plant(crop : Crop) -> Crop:
 	return crop
 
 func get_type():
-	return "SoilCell"
+	return SoilCell

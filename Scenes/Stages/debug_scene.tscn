@@ -9,10 +9,10 @@
 
 [node name="TileMap" parent="." instance=ExtResource("1_bjsdo")]
 
+[node name="CritterDirector" parent="TileMap/FunctionalTMLs/CritterETML" index="0" instance=ExtResource("4_qf766")]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
-
-[node name="CreaturesDirector" parent="." instance=ExtResource("4_qf766")]
 
 [node name="Player" parent="." instance=ExtResource("2_abcel")]
 position = Vector2(3, -6)

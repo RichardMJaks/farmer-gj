@@ -1,7 +1,8 @@
 class_name Critter
 extends CharacterBody2D
 
-var crop : CropCell
+var _crop : CropCell
+var _cell : CritterCell
 #TODO: Decide if one attack will destroy the crop
 var _attack_rate : float = 3
 var _first_attack_delay : float = 5
@@ -11,7 +12,7 @@ var _first_attack_delay : float = 5
 @onready var entry_tween : Tween = _create_entry_tween()
 func _create_entry_tween() -> Tween:
 	var tween = create_tween()
-	tween.tween_property(self, "position", crop.coords - Vector2(5, -5), 1)\
+	tween.tween_property(self, "global_position", _cell.global_position - Vector2(5, -5), 1)\
 		.set_trans(Tween.TRANS_CUBIC)\
 		.set_ease(Tween.EASE_OUT)
 	tween.tween_callback(_arrival)
@@ -44,6 +45,8 @@ func _attack() -> void:
 func take_damage(c : CharacterBody2D) -> void:
 	pass
 
+func set_crop(crop : CropCell) -> void:
+	_crop = crop
 
 #TODO: Time timeouts
 func _on_first_strike_timer_timeout() -> void:

@@ -55,15 +55,15 @@ func _context_action() -> void:
 	if not targeted_cell:
 		return
 	match(targeted_cell.get_type()):
-		"ShopCell":
+		ShopCell:
 			_context_shop()
-		"SellCell":
+		SellCell:
 			_context_sell()
-		"SoilCell":
+		SoilCell:
 			_context_soil()
-		"CropCell":
+		CropCell:
 			_context_crop()
-		"CreatureCell":
+		CritterCell:
 			_context_creature()
 
 func _context_creature() -> void:
