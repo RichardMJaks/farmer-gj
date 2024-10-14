@@ -22,7 +22,6 @@ func get_crop() -> Crop:
 
 func buy_crop() -> Crop:
 	if not _crop:
-		print_debug("Trying to buy non-existent crop at " + str(_coords))
 		return null
 	
 	var crop = _crop
@@ -32,13 +31,8 @@ func buy_crop() -> Crop:
 	crop.change_state(Crop.STATE_CARRIED)
 	remove_child(crop)
 	
-	_crop = null
-	
+	_crop = null	
 	bought_crop.emit(self)
-	
-	var fstring = "Bought %s at %s for %d"
-	print_debug(fstring % [crop, _coords, crop.price])
-	
 	return crop
 
 func get_type():

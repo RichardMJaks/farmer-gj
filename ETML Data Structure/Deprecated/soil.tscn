@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1yiolra5ob08"]
-
-[ext_resource type="TileSet" uid="uid://bet1retjmissw" path="res://Resources/Tilesets/soil.tres" id="1_6ethf"]
-[ext_resource type="Script" path="res://ETML Data Structure/Deprecated/soil.gd" id="2_2xuvq"]
-
-[node name="Soil" type="TileMapLayer"]
-tile_set = ExtResource("1_6ethf")
-script = ExtResource("2_2xuvq")

@@ -67,15 +67,12 @@ func _context_action() -> void:
 			_context_critter()
 
 func _context_critter() -> void:
-	targeted_cell.hit_critter(self)
-	print_debug("Creature")
-	
+	targeted_cell.hit_critter(self)	
 
 func _context_shop() -> void:
 	var crop = targeted_cell.buy_crop()
 	
 	if not crop:
-		print_debug("failed buy")
 		return
 	
 	_add_crop(crop)
@@ -86,11 +83,9 @@ func _context_sell() -> void:
 	targeted_cell.sell_crops()
 
 func _context_crop() -> void:
-	print_debug("Crop %s" % targeted_cell.get_coords())
 	targeted_cell.harvest()
 
 func _context_soil() -> void:
-	print_debug("Soil %s" % targeted_cell.get_coords())
 	#TODO: Flair for when don't have crop to plant
 	if not _crop:
 		return

@@ -15,7 +15,6 @@ func set_crop(crop : Crop) -> Crop:
 	return _crop
 
 func harvest() -> int:
-	print_debug("Harvesting")
 	#TODO: Add flair for when not possible to harvest
 	if not _crop.harvestable:
 		return 0
