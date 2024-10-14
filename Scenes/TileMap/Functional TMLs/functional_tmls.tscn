@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://gdm3f87a2qi5" path="res://Scenes/TileMap/Functional TMLs/SubTMLs/soil_etml.tscn" id="1_thapn"]
 [ext_resource type="PackedScene" uid="uid://bdy150t1egnyj" path="res://Scenes/TileMap/Functional TMLs/SubTMLs/shop_etml.tscn" id="2_oewdu"]
 [ext_resource type="PackedScene" uid="uid://gco0soe3jeu1" path="res://Scenes/TileMap/Functional TMLs/SubTMLs/sell_etml.tscn" id="3_cc8db"]
-[ext_resource type="PackedScene" uid="uid://c6k2cko5gf6va" path="res://Scenes/TileMap/Functional TMLs/SubTMLs/crop_etml.tscn" id="4_ioerg"]
+[ext_resource type="PackedScene" uid="uid://c6k2cko5gf6va" path="res://Scenes/TileMap/Functional TMLs/SubTMLs/crop_etml.tscn" id="4_uyjhc"]
 [ext_resource type="PackedScene" uid="uid://bbwwbm08qos5x" path="res://Scenes/TileMap/Functional TMLs/SubTMLs/critter_etml.tscn" id="5_eosoy"]
 [ext_resource type="PackedScene" uid="uid://ooxos50p17rd" path="res://Scenes/TileMap/Functional TMLs/SubTMLs/indicator_tml.tscn" id="6_eh2hc"]
 
@@ -15,7 +15,7 @@
 
 [node name="SellETML" parent="." instance=ExtResource("3_cc8db")]
 
-[node name="CropETML" parent="." instance=ExtResource("4_ioerg")]
+[node name="CropETML" parent="." instance=ExtResource("4_uyjhc")]
 
 [node name="CritterETML" parent="." instance=ExtResource("5_eosoy")]
 

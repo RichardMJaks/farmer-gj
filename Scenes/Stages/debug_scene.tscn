@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwk1hm43ba04s"]
+[gd_scene load_steps=5 format=3 uid="uid://bwk1hm43ba04s"]
 
 [ext_resource type="PackedScene" uid="uid://djjimhs183yvp" path="res://Scenes/TileMap/tilemap.tscn" id="1_bjsdo"]
 [ext_resource type="PackedScene" uid="uid://bk3volyh844lb" path="res://Scenes/Player/player.tscn" id="2_abcel"]
+[ext_resource type="Script" path="res://Scenes/GUI/coin_counter.gd" id="4_hl227"]
 [ext_resource type="PackedScene" uid="uid://c2t6ag7oofq0c" path="res://Scenes/Critters/critter_director.tscn" id="4_qf766"]
 
 [node name="DebugScene" type="Node2D"]
@@ -15,6 +16,11 @@ zoom = Vector2(3, 3)
 
 [node name="Player" parent="." instance=ExtResource("2_abcel")]
 position = Vector2(3, -6)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("4_hl227")
 
 [editable path="TileMap"]
 [editable path="TileMap/FunctionalTMLs"]

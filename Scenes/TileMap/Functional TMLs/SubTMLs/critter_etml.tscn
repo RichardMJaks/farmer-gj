@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbwwbm08qos5x"]
+[gd_scene load_steps=5 format=3 uid="uid://bbwwbm08qos5x"]
 
+[ext_resource type="Texture2D" uid="uid://ce7y6feqq8ahv" path="res://Art/Tilemaps/transparent_tile.png" id="1_qvmls"]
 [ext_resource type="Script" path="res://ETML Data Structure/ETML Subclasses/critter_etml.gd" id="1_s6k3r"]
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_upoxq"]
+texture = ExtResource("1_qvmls")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_7ayaf"]
+sources/0 = SubResource("TileSetAtlasSource_upoxq")
+
 [node name="CritterETML" type="TileMapLayer"]
+tile_set = SubResource("TileSet_7ayaf")
 script = ExtResource("1_s6k3r")

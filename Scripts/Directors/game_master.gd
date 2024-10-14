@@ -42,6 +42,7 @@ func add_uncollected_coins(amount : int) -> int:
 func collect_coins() -> int:
 	add_coins(uncollected_coins)
 	uncollected_coins = 0
+	crops = 0
 	return uncollected_coins
 
 #TODO: Add coins flair

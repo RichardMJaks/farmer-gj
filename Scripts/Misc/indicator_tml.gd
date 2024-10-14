@@ -60,12 +60,14 @@ func get_cell(coords : Vector2i) -> Cell:
 	return null
 
 
+# Creates new indicator tile while removing all previous ones
 func set_indicator(coords : Vector2i) -> Vector2i:
 	_unset_indicator()
 	set_cell(coords, 0, Vector2i.ZERO)
 	return coords
 
 
+# Remove all indicator tiles
 func _unset_indicator() -> int:
 	var cells = get_used_cells()
 	if not cells:

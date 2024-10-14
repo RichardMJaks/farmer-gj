@@ -81,14 +81,18 @@ func _context_shop() -> void:
 	
 #TODO: Sell flair
 func _context_sell() -> void:
-	GM.collect_coins()
+	targeted_cell.sell_crops()
 
 func _context_crop() -> void:
-	print_debug("Crop")
+	targeted_cell.harvest()
 
 func _context_soil() -> void:
+	#TODO: Flair for when don't have crop to plant
+	if not _crop:
+		return
+	
 	remove_child(_crop)
-	targeted_cell.action(_crop)
+	targeted_cell.plant(_crop)
 	_crop = null
 #endregion	
 

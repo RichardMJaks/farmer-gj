@@ -13,12 +13,17 @@ func _ready() -> void:
 	# Add cells to this custom data type
 	var used_cells = get_used_cells()
 	for cell_coords in used_cells:
-		var cell : Cell = _cell_type.new()
-		cell.set_coords(cell_coords)
-		cells[cell_coords] = cell
-		add_child(cell)
-		cell.position = map_to_local(cell_coords)
-	
+		_create_cell(cell_coords)
+
+func _create_cell(coords : Vector2i) -> Cell:
+	var cell : Cell = _cell_type.new()
+	cell._tml = self
+	cell.set_coords(coords)
+	cells[coords] = cell
+	add_child(cell)
+	cell.global_position = map_to_local(coords)
+	return cell
+
 
 #HACK: We use this function because you cannot change parent class vars in inheriting classes
 func _set_cell_type() -> void:
@@ -40,4 +45,8 @@ func _add_to_gm() -> void:
 func get_cell(cell_coords : Vector2i) -> Cell:
 	if not cells.keys().has(cell_coords):
 		return null
-	return cells[cell_coords]
+	
+	var cell = cells[cell_coords]
+	
+	#HACK: Currently need to check instance validity due to freeing cell for crop and critter tml-s
+	return cell if is_instance_valid(cell) else null

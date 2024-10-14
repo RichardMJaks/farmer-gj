@@ -18,12 +18,10 @@ func _ready() -> void:
 
 func _start_listening() -> void:
 	var cells = owner.cells.values()
-	print_debug(cells) 
 	for cell : ShopCell in cells:
 		cell.bought_crop.connect(_start_refresh)
 
 func _start_refresh(cell : ShopCell) -> void:
-	print_debug("Started shop refresh")
 	var timer : Timer = Timer.new()
 	timer.one_shot = true
 	timer.timeout.connect(func():
@@ -35,7 +33,6 @@ func _start_refresh(cell : ShopCell) -> void:
 
 #TODO: Test set_crop()
 func _set_crop(cell : ShopCell) -> Cell:
-	print_debug("Setting new crop to shop cell")
 	# Create random cell from the current pool
 	var crop : Crop = crops[crop_pool.pick_random()].instantiate()
 	cell.set_crop(crop)

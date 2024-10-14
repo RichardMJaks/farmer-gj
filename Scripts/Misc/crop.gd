@@ -14,12 +14,13 @@ var _cell : SoilCell
 
 # Planted variables
 @export var _stage_growth_time : float = 1
+var _start_frame = 0
 var _stage : int = 0
-var _harvestable : bool = true #TODO: Remind to fix this
+var harvestable : bool = false
 
 # Price stuff
 @export var price : int = 0
-@export var _value : int = 0
+@export var _value : int = 1
 var icon : Resource # Is this necessary?
 
 # States mostly apply to how crop appears
@@ -36,7 +37,7 @@ func _ready() -> void:
 
 #TODO: Add _process() functionality (Maybe not required)
 func _process(_delta: float) -> void:
-	pass
+	planted_sprite.frame = _start_frame + _stage
 
 #TODO: Harvest flair
 func harvest() -> int:
@@ -65,28 +66,24 @@ func _update_state_appearance() -> void:
 			_set_state_planted()
 
 #TODO: In-store animations
-func _set_state_buyable() -> void:
-	print_debug("Crop is buyable")
-	
+func _set_state_buyable() -> void:	
 	planted_sprite.visible = false
 	buy_carry_sprite.visible = true
 	price_tag.visible = true
 
 #TODO: Carry flair
-func _set_state_carried() -> void:
-	print_debug("Crop is carried")
-	
+func _set_state_carried() -> void:	
 	planted_sprite.visible = false
 	buy_carry_sprite.visible = true
 	price_tag.visible = false
 
 #TODO: Plant flair
-func _set_state_planted() -> void:
-	print_debug("Crop is planted")
-	
+func _set_state_planted() -> void:	
 	planted_sprite.visible = true
 	buy_carry_sprite.visible = false
 	price_tag.visible = false
+	
+	stage_timer.start()
 #endregion
 
 #TODO: Add timer timeout functionality
@@ -96,19 +93,20 @@ func _on_stage_timer_timeout() -> void:
 	# if _stage == 3:
 	#	 set_some_var_to_true
 	#	loop stage_timer once more to lengthen, this time showing timer indicators
-	if _stage == 4:
-		stage_timer.stop()
-		return
+	if _stage == 3:
+		rot()
 
 #TODO: Growth flair
 func _grow() -> void:
 	_stage += 1
 	if _stage >= 2:
-		_harvestable = true
+		harvestable = true
 
 #TODO: Rot flair
 func rot() -> void:
-	_stage = 4
+	_stage = 3
+	_value = 0
+	harvestable = true
 	stage_timer.stop()
 
 func _to_string() -> String:
