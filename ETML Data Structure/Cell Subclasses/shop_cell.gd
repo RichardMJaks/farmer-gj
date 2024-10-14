@@ -21,17 +21,25 @@ func get_crop() -> Crop:
 	return _crop
 
 func buy_crop() -> Crop:
+	
+	
+	#FIXME: Probably not required, keeping it in just in case
 	if not _crop:
 		return null
 	
 	var crop = _crop
 	
-	#TODO: Implement prices
+	
+	#TODO: Flair for not enough money
+	if crop.price > GM.coins:
+		return null
+	GM.remove_coins(crop.price)
 	
 	crop.change_state(Crop.STATE_CARRIED)
 	remove_child(crop)
 	
-	_crop = null	
+	_crop = null
+	
 	bought_crop.emit(self)
 	return crop
 

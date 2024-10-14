@@ -21,15 +21,11 @@ func _ready() -> void:
 		push_error("IndicatorTML not set! Is IndicatorTML present in scene?")
 
 func _process(_delta : float) -> void:
-	if not indicator_tml:
-		return
-	
-	var tile_location : Vector2i = indicator_tml.local_to_map(position)
-	targeted_cell = indicator_tml.get_cell(tile_location)		
+	targeted_cell = _handle_indicator()
 	
 	if Input.is_action_just_pressed("a_action"):
 		_context_action()
-	
+
 func _physics_process(_delta: float) -> void:
 	var h_dir : float = Input.get_axis("m_left", "m_right")
 	var v_dir : float = Input.get_axis("m_up", "m_down")
@@ -49,6 +45,35 @@ func _physics_process(_delta: float) -> void:
 		state_machine.set_state("idle")
 
 	move_and_slide()
+
+#region Indicator handling
+func _handle_indicator() -> Cell:
+	if not indicator_tml:
+		return
+	
+	var tile_location : Vector2i = indicator_tml.local_to_map(position)
+	var cell : Cell = indicator_tml.get_cell(tile_location)		
+	
+	if not cell or not _is_interactable(cell):
+		return null
+	
+	indicator_tml.set_indicator(cell.get_coords())
+	return cell
+
+func _is_interactable(cell : Cell) -> bool:
+	var cell_type = cell.get_type()
+	match(cell_type):
+		ShopCell: 
+			return cell.get_crop() != null and _crop == null
+		SoilCell: 
+			return _crop != null
+		SellCell: 
+			return GM.has_uncollected_coins
+		CropCell: 
+			return cell.get_crop().harvestable
+	
+	return true
+#endregion
 
 #region Context Actions
 func _context_action() -> void:

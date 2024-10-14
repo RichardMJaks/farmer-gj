@@ -46,23 +46,24 @@ func _check_for_missing_dependencies() -> int:
 
 func get_cell(coords : Vector2i) -> Cell:
 	var cell = null
+	_unset_indicator()
 	for etml in etmls:
 		if not etml:
 			push_error("Missing ETML!")
 			continue
 		
 		cell = etml.get_cell(coords)
-		if cell:
-			set_indicator(coords)
-			return cell
+		
+		if not cell:
+			continue
+
+		return cell
 	
-	_unset_indicator()
 	return null
 
 
 # Creates new indicator tile while removing all previous ones
 func set_indicator(coords : Vector2i) -> Vector2i:
-	_unset_indicator()
 	set_cell(coords, 0, Vector2i.ZERO)
 	return coords
 

@@ -41,7 +41,10 @@ func _add_to_gm() -> void:
 			GM.soil_etml = self
 		CropCell:
 			GM.crop_etml = self
-	
+
+func get_cells() -> Dictionary:
+	return cells.duplicate()
+
 func get_cell(cell_coords : Vector2i) -> Cell:
 	if not cells.keys().has(cell_coords):
 		return null

@@ -25,6 +25,7 @@ func harvest() -> int:
 	GM.crops += 1
 	GM.total_crops += 1
 	
+	#HACK: This probably can be solved better
 	# Remove the reference for present plant and self
 	_tml.erase_cell(_coords)
 	call_deferred("queue_free")

@@ -9,6 +9,7 @@ var _first_attack_delay : float = 5
 
 @onready var anim : AnimationPlayer = $AnimationPlayer
 
+#FIXME: tweening is bad if we want to kick them away before they reach the crop
 @onready var entry_tween : Tween = _create_entry_tween()
 func _create_entry_tween() -> Tween:
 	var tween = create_tween()

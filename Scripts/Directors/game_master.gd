@@ -13,8 +13,9 @@ var shop_mgr : Node2D
 var crop : PackedScene = preload("res://Scenes/Crop/crop.tscn")
 
 # Money vars
-var coins : int = 0
+var coins : int = 5
 var uncollected_coins = 0
+var has_uncollected_coins = false
 var total_coins : int = 0
 var crops : int = 0
 var total_crops = 0
@@ -36,12 +37,14 @@ func init() -> void:
 
 func add_uncollected_coins(amount : int) -> int:
 	uncollected_coins += amount
+	has_uncollected_coins = true
 	return amount
 
 #TODO: Collect coins flair
 func collect_coins() -> int:
 	add_coins(uncollected_coins)
 	uncollected_coins = 0
+	has_uncollected_coins = false
 	crops = 0
 	return uncollected_coins
 
