@@ -31,7 +31,7 @@ func _start_refresh(cell : ShopCell) -> void:
 	add_child(timer)
 	timer.start(refresh_duration)
 
-#TODO: Test set_crop()
+#TODO: Should flair be handled in cell? prolly
 func _set_crop(cell : ShopCell) -> Cell:
 	# Create random cell from the current pool
 	var crop : Crop = crops[crop_pool.pick_random()].instantiate()

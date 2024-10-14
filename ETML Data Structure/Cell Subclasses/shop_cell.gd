@@ -6,7 +6,7 @@ var _crop : Crop = null
 # Great to 
 signal bought_crop(cell : ShopCell)
 
-#TODO: Requires shop_mgr, figure out later
+#TODO: Flair for spawning crop into shop
 func set_crop(crop : Crop) -> Crop:
 	_crop = crop
 	add_child(_crop)

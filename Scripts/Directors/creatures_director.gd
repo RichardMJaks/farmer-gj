@@ -5,7 +5,7 @@ var critter_ps : PackedScene = preload("res://Scenes/Critters/critter.tscn")
 func _ready() -> void:
 	pass
 
-#TODO: Make creature summoning
+
 func _summon_creature() -> void:
 	var cell = _select_random_plant()
 	if cell == null:
@@ -13,10 +13,10 @@ func _summon_creature() -> void:
 	var critter = _instantiate_critter(cell)
 	GM.critter_etml.target_crop(cell, critter)
 
-#TODO: Make random plant selection
+
 func _select_random_plant() -> CropCell:
 	var critter_cells : Array = GM.critter_etml.cells.keys()
-	var crop_cells : Dictionary = GM.crop_etml.cells
+	var crop_cells : Dictionary = GM.crop_etml.cells.duplicate()
 	
 	# XOR the cells
 	for cell : Vector2i in critter_cells:
@@ -38,6 +38,6 @@ func _instantiate_critter(cell : CropCell) -> Critter:
 	return critter
 	
 
-#TODO: Add timeout functionality
+#TODO: Tweak timeout functionality
 func _on_creature_timer_timeout() -> void:
 	_summon_creature()

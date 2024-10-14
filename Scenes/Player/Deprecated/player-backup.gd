@@ -42,7 +42,6 @@ func _action() -> void:
 	elif actionable_tile.stage > 1:
 		_harvest()
 
-#TODO: Action: Hitting
 func _attack() -> void:
 	kick_creature = actionable_tile.creature
 	state_machine.set_state("kicking")
@@ -52,7 +51,6 @@ func _hit() -> void:
 	kick_creature = null
 	GameMaster.kicked += 1
 
-#TODO Action: planting
 func _plant() -> void:
 	soil_tml.plant(held_crop, actionable_tile)
 	held_crop.queue_free()
@@ -68,7 +66,6 @@ func _harvest() -> void:
 	held_money += received
 	held_crops += 1
 
-#TODO: Action: buying
 func _buy() -> void:
 	var inst = actionable_tile.buy(self)
 	soil_tml.remove_child(inst)

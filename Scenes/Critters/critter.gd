@@ -25,9 +25,9 @@ func _ready() -> void:
 	entry_tween.play()
 	$Sprite2D.frame = randi_range(0, 9)
 
-#TODO: Creature _process() function
+#TODO: Create check to cancel tween in the case plant gets harvested before reaching it
 func _process(_delta: float) -> void:
-	pass
+	move_and_slide()
 
 #TODO: Creature _arrival init
 func _arrival() -> void:
@@ -41,9 +41,9 @@ func _leave() -> void:
 func _attack() -> void:
 	pass
 	
-#TODO: Creature take damage
+#TODO: Actual damage animation (send it to _leave function)
 func take_damage(c : CharacterBody2D) -> void:
-	pass
+	velocity.x = 30
 
 func set_crop(crop : CropCell) -> void:
 	_crop = crop
