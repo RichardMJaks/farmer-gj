@@ -39,7 +39,7 @@ func _physics_process(_delta: float) -> void:
 	
 	if dir_vec.length() != 0:
 		velocity = dir_vec * speed
-		state_machine.set_state("walking")
+		state_machine.set_state()
 	else:
 		velocity = Vector2.ZERO
 		state_machine.set_state("idle")

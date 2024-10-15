@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bwk1hm43ba04s"]
 
 [ext_resource type="PackedScene" uid="uid://djjimhs183yvp" path="res://Scenes/TileMap/tilemap.tscn" id="1_bjsdo"]
-[ext_resource type="PackedScene" uid="uid://bk3volyh844lb" path="res://Scenes/Player/player.tscn" id="2_abcel"]
+[ext_resource type="PackedScene" uid="uid://bk3volyh844lb" path="res://Scenes/Characters/Player/player.tscn" id="2_abcel"]
 [ext_resource type="Script" path="res://Scenes/GUI/coin_counter.gd" id="4_hl227"]
-[ext_resource type="PackedScene" uid="uid://c2t6ag7oofq0c" path="res://Scenes/Critters/critter_director.tscn" id="4_qf766"]
+[ext_resource type="PackedScene" uid="uid://c2t6ag7oofq0c" path="res://Scenes/Characters/Critters/critter_director.tscn" id="4_qf766"]
 
 [node name="DebugScene" type="Node2D"]
 

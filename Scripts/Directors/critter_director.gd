@@ -1,6 +1,6 @@
 extends Node2D
 
-var critter_ps : PackedScene = preload("res://Scenes/Critters/critter.tscn")
+var critter_ps : PackedScene = preload("res://Scenes/Characters/Critters/critter.tscn")
 
 func _ready() -> void:
 	pass

@@ -1,8 +1,8 @@
 [gd_scene load_steps=24 format=3 uid="uid://bk3volyh844lb"]
 
 [ext_resource type="Texture2D" uid="uid://0dptjoslh7nb" path="res://Art/Spritesheets/farmer.png" id="1_5wneu"]
-[ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_v2qtl"]
-[ext_resource type="Script" path="res://Scenes/Player/state_machine.gd" id="3_1j0ww"]
+[ext_resource type="Script" path="res://Scenes/Characters/Player/player.gd" id="1_v2qtl"]
+[ext_resource type="Script" path="res://Scenes/Characters/Player/state_machine.gd" id="3_1j0ww"]
 [ext_resource type="Texture2D" uid="uid://bcnfbxs7w3jxr" path="res://Art/Weapons/boot.png" id="3_2rjws"]
 [ext_resource type="AudioStream" uid="uid://bo56jg25g1mt5" path="res://Sound/SFX/Steps/step_2.ogg" id="4_q165p"]
 [ext_resource type="AudioStream" uid="uid://6vr783j6uchq" path="res://Sound/SFX/Steps/step_3.ogg" id="5_u30uj"]

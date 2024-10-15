@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://da5g6s70kykj7"]
 
-[ext_resource type="Script" path="res://Scenes/Critters/critter.gd" id="1_5r4pq"]
+[ext_resource type="Script" path="res://Scenes/Characters/Critters/critter.gd" id="1_5r4pq"]
 [ext_resource type="Texture2D" uid="uid://jgc4mks6l2nl" path="res://Art/Spritesheets/pesky creatures.png" id="2_5vtfh"]
 
 [sub_resource type="Animation" id="Animation_wxpyn"]
