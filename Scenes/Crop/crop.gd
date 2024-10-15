@@ -14,7 +14,7 @@ var _cell : CropCell
 @export var _start_frame = 0
 var harvestable : bool = false
 var _stage : int = 0
-@export var _stage_growth_time : float = 1
+@export var _stage_growth_time : float = 5
 @onready var stage_timer : Timer = (
 	func() -> Timer:
 		var timer = Timer.new()

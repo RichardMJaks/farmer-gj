@@ -30,7 +30,10 @@ func harvest() -> int:
 	_remove()
 	
 	return earned_coins
-	
+
+func rot() -> Crop:
+	_crop.rot()
+	return get_crop()
 
 func get_crop() -> Crop:
 	return _crop

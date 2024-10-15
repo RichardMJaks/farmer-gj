@@ -4,8 +4,8 @@ extends CharacterBody2D
 var _crop : CropCell
 var _cell : CritterCell
 #TODO: Decide if one attack will destroy the crop
-var _attack_speed : float = 5
-var _attack_timer : Timer = (
+var _attack_speed : float = 2
+@onready var _attack_timer : Timer = (
 	func() -> Timer:
 		var timer = Timer.new()
 		timer.wait_time = _attack_speed
@@ -64,6 +64,7 @@ func _attack() -> void:
 	_leave() #TODO: Wait for attack animation to finish before leaving
 
 func _handle_attack() -> void:
+	_stop_attacking()
 	_crop.rot()
 	
 #TODO: Actual damage animation (send it to _leave function)
