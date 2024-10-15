@@ -11,7 +11,7 @@ func _summon_creature() -> void:
 	if cell == null:
 		return
 	var critter = _instantiate_critter(cell)
-	GM.critter_etml.target_crop(cell, critter)
+	add_child(critter)
 
 
 func _select_random_plant() -> CropCell:
@@ -26,9 +26,9 @@ func _select_random_plant() -> CropCell:
 	for key in crop_cells.keys():
 		var cell = crop_cells[key]
 		#HACK: required to avoid previously freed instance error
-		if not is_instance_valid(cell):
-			crop_cells.erase(key)
-			continue
+		#if not is_instance_valid(cell):
+		#	crop_cells.erase(key)
+		#w	continue
 		
 		if cell.rotted:
 			crop_cells.erase(key)

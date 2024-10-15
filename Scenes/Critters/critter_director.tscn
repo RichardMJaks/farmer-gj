@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c2t6ag7oofq0c"]
 
-[ext_resource type="Script" path="res://Scripts/Directors/creatures_director.gd" id="1_y46be"]
+[ext_resource type="Script" path="res://Scripts/Directors/critter_director.gd" id="1_y46be"]
 
 [node name="CritterDirector" type="Node2D"]
 script = ExtResource("1_y46be")

@@ -82,20 +82,7 @@ texture = ExtResource("2_5vtfh")
 hframes = 4
 vframes = 4
 
-[node name="Node" type="Node" parent="."]
-
-[node name="FirstStrikeTimer" type="Timer" parent="Node"]
-wait_time = 5.0
-one_shot = true
-
-[node name="ExpirationTimer" type="Timer" parent="Node"]
-wait_time = 5.0
-one_shot = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_narnv")
 }
-
-[connection signal="timeout" from="Node/FirstStrikeTimer" to="." method="_on_first_strike_timer_timeout"]
-[connection signal="timeout" from="Node/ExpirationTimer" to="." method="_on_expiration_timer_timeout"]

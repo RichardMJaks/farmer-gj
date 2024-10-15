@@ -27,8 +27,7 @@ func harvest() -> int:
 	
 	#HACK: This probably can be solved better
 	# Remove the reference for present plant and self
-	_tml.erase_cell(_coords)
-	call_deferred("queue_free")
+	_remove()
 	
 	return earned_coins
 	

@@ -8,15 +8,22 @@ extends Node2D
 
 @onready var price_tag : Label = $BuyCarrySprite/PriceTag
 
-@onready var stage_timer : Timer = $StageTimer
-
 var _cell : CropCell 
 
 # Planted variables
-@export var _stage_growth_time : float = 1
-var _start_frame = 0
-var _stage : int = 0
+@export var _start_frame = 0
 var harvestable : bool = false
+var _stage : int = 0
+@export var _stage_growth_time : float = 1
+@onready var stage_timer : Timer = (
+	func() -> Timer:
+		var timer = Timer.new()
+		timer.wait_time = _stage_growth_time
+		timer.one_shot = false
+		timer.autostart = true
+		timer.timeout.connect(_on_stage_timer_timeout)
+		return timer
+).call()
 
 # Price stuff
 @export var price : int = 0
@@ -83,7 +90,7 @@ func _set_state_planted() -> void:
 	buy_carry_sprite.visible = false
 	price_tag.visible = false
 	
-	stage_timer.start()
+	add_child(stage_timer)
 #endregion
 
 #TODO: Add timer timeout functionality
