@@ -4,7 +4,20 @@ extends State
 
 func enter() -> void:
 	anim.play("kick")
-	anim.animation_finished.connect(state_changed.emit.bind(self, idle))
+	var ap_conns : Array = anim.animation_finished.get_connections()
+	
+	# Lets make sure we don't trigger anything else by accident
+	if ap_conns.size() != 0:
+		for conn : Dictionary in ap_conns:
+			print(conn)
+			anim.animation_finished.disconnect(conn["callable"])
+	
+	anim.animation_finished.connect(_finish.unbind(1))
+
+
+func _finish() -> void:
+	anim.animation_finished.disconnect(_finish)
+	state_changed.emit.bind(self, idle)
 
 func exit() -> void:
 	pass

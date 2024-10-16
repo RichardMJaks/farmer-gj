@@ -2,6 +2,7 @@ class_name State
 extends Node
 
 var anim : AnimationPlayer
+@warning_ignore("unused_signal")
 signal state_changed(state : State, new_state : State)
 
 func enter() -> void:

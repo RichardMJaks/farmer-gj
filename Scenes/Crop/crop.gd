@@ -31,11 +31,11 @@ var _stage : int = 0
 var icon : Resource # Is this necessary?
 
 # States mostly apply to how crop appears
-var state = STATE_BUYABLE
-enum {
-	STATE_BUYABLE,
-	STATE_CARRIED, 
-	STATE_PLANTED
+var state = STATE.BUYABLE
+enum STATE {
+	BUYABLE,
+	CARRIED, 
+	PLANTED
 }
 
 func _ready() -> void:
@@ -56,7 +56,7 @@ func take_damage() -> void:
 	pass
 
 #region States
-func change_state(new_state : int) -> int:
+func change_state(new_state : STATE) -> int:
 	state = new_state
 	
 	_update_state_appearance()
@@ -65,11 +65,11 @@ func change_state(new_state : int) -> int:
 
 func _update_state_appearance() -> void:
 	match(state):
-		STATE_BUYABLE:
+		STATE.BUYABLE:
 			_set_state_buyable()
-		STATE_CARRIED:
+		STATE.CARRIED:
 			_set_state_carried()
-		STATE_PLANTED:
+		STATE.PLANTED:
 			_set_state_planted()
 
 #TODO: In-store animations

@@ -2,7 +2,7 @@ class_name Critter
 extends CharacterBody2D
 
 var _crop : CropCell
-var _cell : CritterCell
+var cell : CritterCell
 #TODO: Decide if one attack will destroy the crop
 var _attack_speed : float = 2
 @onready var _attack_timer : Timer = (
@@ -68,10 +68,12 @@ func _handle_attack() -> void:
 	_crop.rot()
 	
 #TODO: Actual damage animation (send it to _leave function)
-func take_damage(c : CharacterBody2D) -> void:
+func take_damage(_c : CharacterBody2D) -> void:
 	_stop_attacking()
 	velocity.x = 30
 
+#TODO: Re-check this script, this function is called like 3 times for some reason
+# Prolly bc of the half-baked solution atm
 func _stop_attacking() -> void:
 	if _attack_timer == null or not is_instance_valid(_attack_timer):
 		return

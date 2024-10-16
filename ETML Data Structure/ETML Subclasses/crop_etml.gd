@@ -1,8 +1,6 @@
 class_name CropETML
 extends ExtendedTileMapLayer
 
-var _crop : Crop
-
 func _set_cell_type() -> void:
 	_cell_type = CropCell
 	

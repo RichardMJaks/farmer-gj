@@ -94,8 +94,13 @@ func _context_action() -> void:
 		CritterCell:
 			_context_critter()
 
+
 func _context_critter() -> void:
+	if state_machine.current_state.name == "attacking":
+		return
 	state_machine.force_state_change("attacking")
+
+func _ch_hit() -> void:
 	targeted_cell.hit_critter(self)	
 
 #TODO: Sprite change to carrying when buying
@@ -108,12 +113,15 @@ func _context_shop() -> void:
 	_add_crop(crop)
 	_crop.position = crop_position
 	
+	
 #TODO: Sell flair
 func _context_sell() -> void:
 	targeted_cell.sell_crops()
 
+
 func _context_crop() -> void:
 	targeted_cell.harvest()
+
 
 #TODO: Sprite change to regular when planted
 func _context_soil() -> void:
@@ -125,6 +133,7 @@ func _context_soil() -> void:
 	targeted_cell.plant(_crop)
 	_crop = null
 #endregion	
+
 
 #region Helper functions
 func _add_crop(crop : Crop) -> void:

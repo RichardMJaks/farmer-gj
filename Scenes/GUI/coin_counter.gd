@@ -1,6 +1,6 @@
 extends Label
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	text = _zero_padding_for_money()
 	
 func _zero_padding_for_money() -> String:

@@ -3,9 +3,9 @@ extends Cell
 
 var _critter : Critter = null
 
-func set_critter(critter : Critter, crop : CropCell) -> Critter:
+func set_critter(critter : Critter) -> Critter:
 	_critter = critter
-	_critter._cell = self
+	_critter.cell = self
 	return _critter
 
 func hit_critter(c : CharacterBody2D) -> void:
