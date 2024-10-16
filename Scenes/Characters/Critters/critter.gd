@@ -81,8 +81,8 @@ func _go_to_plant(delta) -> void:
 	var weight = total_time_elapsed / duration
 	# Cubic interpolation to arrive
 	global_position = starting_position.lerp(
-		_crop.global_position,						# b					(target vector)
-		-(weight * weight) + 2 * weight				# weight 			(how far up the curve)	
+		_crop.global_position,
+		-(weight * weight) + 2 * weight
 	)
 	total_time_elapsed += delta
 
