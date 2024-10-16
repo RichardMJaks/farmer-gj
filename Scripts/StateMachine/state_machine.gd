@@ -2,6 +2,8 @@ extends Node
 
 @export var initial_state : State
 @export var animation_player : AnimationPlayer
+@export var audio_player : Node
+@export var char : Node2D
 
 var current_state : State
 var states : Dictionary = {}	# This is used only for forced transitions
@@ -14,6 +16,10 @@ func _ready() -> void:
 			child.state_changed.connect(_on_change_state)
 			if animation_player:
 				child.anim = animation_player
+			if char:
+				child.char = char
+			if audio_player:
+				child.audio_player = audio_player
 	
 	if initial_state:
 		initial_state.enter()

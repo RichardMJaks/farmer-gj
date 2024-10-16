@@ -68,7 +68,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".")
+tracks/1/path = NodePath("StateMachine/attacking")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -127,10 +127,12 @@ bus = &"bird_fly"
 stream = SubResource("AudioStreamRandomizer_cxpkg")
 bus = &"bird_screech"
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "animation_player")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "animation_player", "audio_player", "char")]
 script = ExtResource("11_cg0hu")
 initial_state = NodePath("flying_in")
 animation_player = NodePath("../AnimationPlayer")
+audio_player = NodePath("../AudioPlayer")
+char = NodePath("..")
 
 [node name="flying_in" type="Node" parent="StateMachine" node_paths=PackedStringArray("attacking", "flying_away")]
 script = ExtResource("12_vpxex")

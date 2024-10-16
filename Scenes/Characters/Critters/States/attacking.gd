@@ -15,21 +15,28 @@ var _attack_speed : float = 2
 ).call()
 
 func _attack() -> void:
-	_handle_attack()
+	anim.play("hit")
 
 func _handle_attack() -> void:
-	owner._crop.rot()
+	if char._crop == null or not is_instance_valid(char._crop):
+		state_changed.emit(self, flying_away)
+		return
+	char._crop.rot()
 	state_changed.emit(self, flying_away)
 
 func take_damage(dir : Vector2) -> void:
+	getting_kicked.dir = dir
+	state_changed.emit(self, getting_kicked)
+
+func _leave() -> void:
 	state_changed.emit(self, getting_kicked)
 
 func enter() -> void:
 	#HACK: I really don't like checking if instance is valid
-	if owner._crop == null or not is_instance_valid(owner._crop):
+	if char._crop == null or not is_instance_valid(char._crop):
 		state_changed.emit(self, flying_away)
 		return
-	GM.critter_etml.attack_crop(owner, owner._crop)
+	GM.critter_etml.attack_crop(char, char._crop)
 	add_child(_attack_timer)
 
 func exit() -> void:
