@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://da5g6s70kykj7"]
+[gd_scene load_steps=22 format=3 uid="uid://da5g6s70kykj7"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Critters/critter.gd" id="1_5r4pq"]
 [ext_resource type="Texture2D" uid="uid://jgc4mks6l2nl" path="res://Art/Spritesheets/pesky creatures.png" id="2_5vtfh"]
@@ -10,6 +10,11 @@
 [ext_resource type="AudioStream" uid="uid://bofmiwuhhh7pq" path="res://Sound/SFX/Bird Flying/Birdflying5.wav" id="8_oep0p"]
 [ext_resource type="AudioStream" uid="uid://wv7dcc8ys576" path="res://Sound/SFX/Bird Screech/Birdscreech1.wav" id="9_oi783"]
 [ext_resource type="AudioStream" uid="uid://dvt252oviwqwa" path="res://Sound/SFX/Bird Screech/Birdscreech2.wav" id="10_j4cw4"]
+[ext_resource type="Script" path="res://Scripts/StateMachine/state_machine.gd" id="11_cg0hu"]
+[ext_resource type="Script" path="res://Scenes/Characters/Critters/States/flying_in.gd" id="12_vpxex"]
+[ext_resource type="Script" path="res://Scenes/Characters/Critters/States/attacking.gd" id="13_74u25"]
+[ext_resource type="Script" path="res://Scenes/Characters/Critters/States/flying_away.gd" id="14_0jago"]
+[ext_resource type="Script" path="res://Scenes/Characters/Critters/States/getting_kicked.gd" id="15_mlorw"]
 
 [sub_resource type="Animation" id="Animation_wxpyn"]
 length = 0.001
@@ -121,3 +126,24 @@ bus = &"bird_fly"
 [node name="screech" type="AudioStreamPlayer" parent="AudioPlayer"]
 stream = SubResource("AudioStreamRandomizer_cxpkg")
 bus = &"bird_screech"
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "animation_player")]
+script = ExtResource("11_cg0hu")
+initial_state = NodePath("flying_in")
+animation_player = NodePath("../AnimationPlayer")
+
+[node name="flying_in" type="Node" parent="StateMachine" node_paths=PackedStringArray("attacking", "flying_away")]
+script = ExtResource("12_vpxex")
+attacking = NodePath("../attacking")
+flying_away = NodePath("../flying_away")
+
+[node name="attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("flying_away", "getting_kicked")]
+script = ExtResource("13_74u25")
+flying_away = NodePath("../flying_away")
+getting_kicked = NodePath("../getting_kicked")
+
+[node name="flying_away" type="Node" parent="StateMachine"]
+script = ExtResource("14_0jago")
+
+[node name="getting_kicked" type="Node" parent="StateMachine"]
+script = ExtResource("15_mlorw")

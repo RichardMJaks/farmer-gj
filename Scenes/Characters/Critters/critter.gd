@@ -4,17 +4,6 @@ extends CharacterBody2D
 var _crop : CropCell
 var cell : CritterCell
 
-var _attack_speed : float = 2
-@onready var _attack_timer : Timer = (
-	func() -> Timer:
-		var timer = Timer.new()
-		timer.wait_time = _attack_speed
-		timer.one_shot = true
-		timer.autostart = true
-		timer.timeout.connect(_attack)
-		return timer
-).call()
-
 @onready var anim : AnimationPlayer = $AnimationPlayer
 @onready var audio_player : Node = $AudioPlayer
 
@@ -64,35 +53,8 @@ func _process(delta: float) -> void:
 		_leave()
 		move_and_slide()
 		return
-	
-	if not cell:
-		_go_to_plant(delta)
 		
 	move_and_slide()
-
-
-func _go_to_plant(delta) -> void:
-	var duration = 2
-	
-	if total_time_elapsed / duration >= 1:
-		_arrival()
-		return
-	
-	var weight = total_time_elapsed / duration
-	# Cubic interpolation to arrive
-	global_position = starting_position.lerp(
-		_crop.global_position,
-		-(weight * weight) + 2 * weight
-	)
-	total_time_elapsed += delta
-
-func _arrival() -> void:
-	#HACK: I really don't like checking if instance is valid
-	if _crop == null or not is_instance_valid(_crop):
-		_leave()
-		return
-	GM.critter_etml.attack_crop(self, _crop)
-	add_child(_attack_timer)
 
 func _leave() -> void:
 	audio_player.play("fly")
@@ -101,28 +63,9 @@ func _leave() -> void:
 	if cell:
 		cell._remove()
 	left = true
-
-func _attack() -> void:
-	_handle_attack()
-
-func _handle_attack() -> void:
-	_crop.rot()
 	
 func take_damage(dir: Vector2) -> void:
 	_stop_attacking()
-	GM.critter_etml.targeted_crops.erase(_crop)
-	velocity = dir * 300
-	left = true
-	anim.play("get_kicked")
-
-func _stop_attacking() -> void:
-	if _attack_timer == null or not is_instance_valid(_attack_timer):
-		return
-	_attack_timer.stop()
-	#HACK: Temporary fix to avoid the error
-	if _attack_timer.get_parent():
-		remove_child(_attack_timer)
-	_attack_timer.queue_free()
 
 func set_crop(crop : CropCell) -> void:
 	_crop = crop
