@@ -1,6 +1,9 @@
 extends Node2D
 
 var critter_ps : PackedScene = preload("res://Scenes/Characters/Critters/critter.tscn")
+@export var spawn_protected: Vector2 = Vector2(120, 150)
+
+var critters: Array[Critter] = []
 
 func _ready() -> void:
 	pass
@@ -15,11 +18,11 @@ func _summon_creature() -> void:
 
 
 func _select_random_plant() -> CropCell:
-	var critter_cells : Array = GM.critter_etml.cells.keys()
+	var critter_cells : Array = GM.critter_etml.targeted_crops
 	var crop_cells : Dictionary = GM.crop_etml.get_cells()
 	
 	# XOR the cells
-	for cell : Vector2i in critter_cells:
+	for cell : Vector2i in critter_cells.map(func(c): return c.get_coords()):
 		crop_cells.erase(cell)
 	
 	# Filter out rotted plants
@@ -35,12 +38,20 @@ func _select_random_plant() -> CropCell:
 	
 	if crop_cells.is_empty():
 		return null
+	
 	return crop_cells[crop_cells.keys().pick_random()]
 
 func _instantiate_critter(cell : CropCell) -> Critter:
 	var critter : Critter = critter_ps.instantiate()
 	critter.set_crop(cell)
-		
+	
+	# Get spawn direction
+	var spawn_direction: Vector2 = Vector2(1, 0).rotated(randf_range(0, 360))
+	
+	# Extend it to spawn protected bound
+	var spawn: Vector2 = spawn_protected * spawn_direction * 1.1
+	critter.global_position = spawn
+	GM.critter_etml.target_crop(critter, cell)
 	return critter
 	
 

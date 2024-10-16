@@ -21,9 +21,7 @@ func get_crop() -> Crop:
 	return _crop
 
 func buy_crop() -> Crop:
-	
-	
-	#FIXME: Probably not required, keeping it in just in case
+	#FIXME: Probably not required, keeping it in just in case, remove after thorough checking
 	if not _crop:
 		return null
 	

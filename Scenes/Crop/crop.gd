@@ -42,7 +42,6 @@ func _ready() -> void:
 	price_tag.text = str(price)
 	_update_state_appearance()
 
-#TODO: Add _process() functionality (Maybe not required)
 func _process(_delta: float) -> void:
 	planted_sprite.frame = _start_frame + _stage
 
@@ -50,10 +49,6 @@ func _process(_delta: float) -> void:
 func harvest() -> int:
 	queue_free()
 	return _value
-
-#TODO: Add take_damage() functionality (maybe just rot)
-func take_damage() -> void:
-	pass
 
 #region States
 func change_state(new_state : STATE) -> int:
@@ -93,15 +88,15 @@ func _set_state_planted() -> void:
 	add_child(stage_timer)
 #endregion
 
-#TODO: Add timer timeout functionality
 func _on_stage_timer_timeout() -> void:
+	if _stage == 2:
+		rot()
 	_grow()
 	#TODO: Maybe make ripe phase last longer than growth?
 	# if _stage == 3:
 	#	 set_some_var_to_true
 	#	loop stage_timer once more to lengthen, this time showing timer indicators
-	if _stage == 3:
-		rot()
+	
 
 #TODO: Growth flair
 func _grow() -> void:

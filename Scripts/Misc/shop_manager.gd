@@ -6,15 +6,16 @@ var crops : Dictionary = {
 	"wheat" : preload("res://Scenes/Crop/crop.tscn")
 }
 
-var crop_pool : Array[String] = [
-	"wheat"
-]
+var crop_pool : Array[String] = []
 
 func _ready() -> void:
 	GM.shop_mgr = self
 	
 	# Make this listen to if any crops are bought
 	call_deferred("_start_listening")
+
+func _process(delta: float) -> void:
+	crop_pool = GM.crop_pool
 
 func _start_listening() -> void:
 	var cells = owner.cells.values()

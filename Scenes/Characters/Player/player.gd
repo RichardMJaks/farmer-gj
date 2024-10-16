@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-#TODO: Add single crop at a time
-
 @export var speed : float
 @export var acceleration_time : float
 
@@ -112,6 +110,8 @@ func _ch_hit() -> void:
 	var dir = boot.transform.x
 	dir.x *= sprite_marker.scale.x
 	dir.y *= -1
+	if targeted_cell == null or not is_instance_valid(targeted_cell):
+		return
 	targeted_cell.hit_critter(dir)	
 
 #TODO: Sprite change to carrying when buying
@@ -136,7 +136,6 @@ func _context_crop() -> void:
 	audio_player.play("harvest")
 
 
-#TODO: Sprite change to regular when planted
 func _context_soil() -> void:
 	#TODO: Flair for when don't have crop to plant
 	if not _crop:
