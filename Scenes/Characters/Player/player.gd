@@ -27,6 +27,13 @@ func _process(_delta : float) -> void:
 		_context_action()
 
 func _physics_process(_delta: float) -> void:
+	_handle_movement()
+	move_and_slide()
+
+# Movement must be handled here, because otherwise it will be blocked due to state changes
+# Will change if we want to override movement someday
+# Future's problem tho
+func _handle_movement() -> void:
 	var h_dir : float = Input.get_axis("m_left", "m_right")
 	var v_dir : float = Input.get_axis("m_up", "m_down")
 	
@@ -39,12 +46,8 @@ func _physics_process(_delta: float) -> void:
 	
 	if dir_vec.length() != 0:
 		velocity = dir_vec * speed
-		state_machine.set_state()
 	else:
 		velocity = Vector2.ZERO
-		state_machine.set_state("idle")
-
-	move_and_slide()
 
 #region Indicator handling
 func _handle_indicator() -> Cell:
@@ -92,8 +95,10 @@ func _context_action() -> void:
 			_context_critter()
 
 func _context_critter() -> void:
+	state_machine.force_state_change("attacking")
 	targeted_cell.hit_critter(self)	
 
+#TODO: Sprite change to carrying when buying
 func _context_shop() -> void:
 	var crop = targeted_cell.buy_crop()
 	
@@ -110,6 +115,7 @@ func _context_sell() -> void:
 func _context_crop() -> void:
 	targeted_cell.harvest()
 
+#TODO: Sprite change to regular when planted
 func _context_soil() -> void:
 	#TODO: Flair for when don't have crop to plant
 	if not _crop:

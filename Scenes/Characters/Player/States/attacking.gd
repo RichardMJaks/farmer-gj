@@ -1,11 +1,10 @@
-class_name State
-extends Node
+extends State
 
-var anim : AnimationPlayer
-signal state_changed(state : State, new_state : State)
+@export var idle : State
 
 func enter() -> void:
-	pass
+	anim.play("kick")
+	anim.animation_finished.connect(state_changed.emit.bind(self, idle))
 
 func exit() -> void:
 	pass
