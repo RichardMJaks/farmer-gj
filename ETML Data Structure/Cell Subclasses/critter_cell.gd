@@ -8,8 +8,8 @@ func set_critter(critter : Critter) -> Critter:
 	_critter.cell = self
 	return _critter
 
-func hit_critter(c : CharacterBody2D) -> void:
-	_critter.take_damage(c)
+func hit_critter(dir: Vector2) -> void:
+	_critter.take_damage(dir)
 	_remove()
 
 func get_critter() -> Critter:

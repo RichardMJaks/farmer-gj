@@ -16,6 +16,9 @@ var indicator_tml : TileMapLayer = null
 
 @onready var targeted_cell : Cell = null
 
+@onready var boot : Sprite2D = $Sprite/Weapon/Boot
+var facing_dir : float = 1
+
 func _ready() -> void:
 	if not indicator_tml:
 		push_error("IndicatorTML not set! Is IndicatorTML present in scene?")
@@ -38,9 +41,11 @@ func _handle_movement() -> void:
 	var v_dir : float = Input.get_axis("m_up", "m_down")
 	
 	if h_dir < 0:
-		sprite_marker.scale.x = -1
+		facing_dir = -1
 	if h_dir > 0:
-		sprite_marker.scale.x = 1
+		facing_dir = 1
+	
+	sprite_marker.scale.x = facing_dir
 	
 	var dir_vec : Vector2 = Vector2(h_dir, v_dir).normalized()
 	
@@ -101,7 +106,10 @@ func _context_critter() -> void:
 	state_machine.force_state_change("attacking")
 
 func _ch_hit() -> void:
-	targeted_cell.hit_critter(self)	
+	var dir = boot.transform.x
+	dir.x *= facing_dir
+	dir.y *= -1
+	targeted_cell.hit_critter(dir)	
 
 #TODO: Sprite change to carrying when buying
 func _context_shop() -> void:

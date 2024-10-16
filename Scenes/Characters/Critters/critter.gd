@@ -56,7 +56,7 @@ func _arrival() -> void:
 #TODO: Creature leave function
 func _leave() -> void:
 	_stop_attacking()
-	take_damage(null)
+	take_damage(Vector2.RIGHT)
 
 #TODO: Creature attack
 func _attack() -> void:
@@ -68,17 +68,20 @@ func _handle_attack() -> void:
 	_crop.rot()
 	
 #TODO: Actual damage animation (send it to _leave function)
-func take_damage(_c : CharacterBody2D) -> void:
+func take_damage(dir: Vector2) -> void:
 	_stop_attacking()
-	velocity.x = 30
+	velocity = dir * 300
 
 #TODO: Re-check this script, this function is called like 3 times for some reason
 # Prolly bc of the half-baked solution atm
+# Most likely happens when there is no crop to attack (2x)
 func _stop_attacking() -> void:
 	if _attack_timer == null or not is_instance_valid(_attack_timer):
 		return
 	_attack_timer.stop()
-	remove_child(_attack_timer)
+	#Temporary fix to avoid the error, upper todo is still a problem tho
+	if _attack_timer.get_parent():
+		remove_child(_attack_timer)
 	_attack_timer.queue_free()
 
 func set_crop(crop : CropCell) -> void:
