@@ -60,3 +60,6 @@ func force_state_change(new_state : String) -> void:
 		current_state.exit()
 	
 	state.enter()
+	
+	current_state = state
+	

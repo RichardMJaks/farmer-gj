@@ -1,7 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://da5g6s70kykj7"]
+[gd_scene load_steps=17 format=3 uid="uid://da5g6s70kykj7"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Critters/critter.gd" id="1_5r4pq"]
 [ext_resource type="Texture2D" uid="uid://jgc4mks6l2nl" path="res://Art/Spritesheets/pesky creatures.png" id="2_5vtfh"]
+[ext_resource type="Script" path="res://Scenes/Characters/Player/audio_player.gd" id="3_7sbph"]
+[ext_resource type="AudioStream" uid="uid://bjwojctqo52x5" path="res://Sound/SFX/Bird Flying/Birdflying1.wav" id="4_wc0tb"]
+[ext_resource type="AudioStream" uid="uid://cxgr6l0p2q8nb" path="res://Sound/SFX/Bird Flying/Birdflying2.wav" id="5_3rh02"]
+[ext_resource type="AudioStream" uid="uid://cyn0kn3m5mk7s" path="res://Sound/SFX/Bird Flying/Birdflying3.wav" id="6_2qq5g"]
+[ext_resource type="AudioStream" uid="uid://c6yxwof2g44lu" path="res://Sound/SFX/Bird Flying/Birdflying4.wav" id="7_fj14c"]
+[ext_resource type="AudioStream" uid="uid://bofmiwuhhh7pq" path="res://Sound/SFX/Bird Flying/Birdflying5.wav" id="8_oep0p"]
+[ext_resource type="AudioStream" uid="uid://wv7dcc8ys576" path="res://Sound/SFX/Bird Screech/Birdscreech1.wav" id="9_oi783"]
+[ext_resource type="AudioStream" uid="uid://dvt252oviwqwa" path="res://Sound/SFX/Bird Screech/Birdscreech2.wav" id="10_j4cw4"]
 
 [sub_resource type="Animation" id="Animation_wxpyn"]
 length = 0.001
@@ -74,15 +82,39 @@ _data = {
 "hit": SubResource("Animation_w7jh3")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_nanbh"]
+streams_count = 5
+stream_0/stream = ExtResource("4_wc0tb")
+stream_1/stream = ExtResource("5_3rh02")
+stream_2/stream = ExtResource("6_2qq5g")
+stream_3/stream = ExtResource("7_fj14c")
+stream_4/stream = ExtResource("8_oep0p")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_cxpkg"]
+streams_count = 2
+stream_0/stream = ExtResource("9_oi783")
+stream_1/stream = ExtResource("10_j4cw4")
+
 [node name="Critter" type="CharacterBody2D"]
 script = ExtResource("1_5r4pq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_5vtfh")
-hframes = 4
+hframes = 3
 vframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_narnv")
 }
+
+[node name="AudioPlayer" type="Node" parent="."]
+script = ExtResource("3_7sbph")
+
+[node name="fly" type="AudioStreamPlayer" parent="AudioPlayer"]
+stream = SubResource("AudioStreamRandomizer_nanbh")
+bus = &"bird_fly"
+
+[node name="screech" type="AudioStreamPlayer" parent="AudioPlayer"]
+stream = SubResource("AudioStreamRandomizer_cxpkg")
+bus = &"bird_screech"

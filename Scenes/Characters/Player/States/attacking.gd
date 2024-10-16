@@ -9,15 +9,15 @@ func enter() -> void:
 	# Lets make sure we don't trigger anything else by accident
 	if ap_conns.size() != 0:
 		for conn : Dictionary in ap_conns:
-			print(conn)
 			anim.animation_finished.disconnect(conn["callable"])
 	
 	anim.animation_finished.connect(_finish.unbind(1))
 
 
 func _finish() -> void:
+	print(state_changed.get_connections())
+	state_changed.emit(self, idle)
 	anim.animation_finished.disconnect(_finish)
-	state_changed.emit.bind(self, idle)
 
 func exit() -> void:
 	pass

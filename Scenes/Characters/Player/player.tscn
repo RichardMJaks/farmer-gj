@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bk3volyh844lb"]
+[gd_scene load_steps=29 format=3 uid="uid://bk3volyh844lb"]
 
 [ext_resource type="Texture2D" uid="uid://0dptjoslh7nb" path="res://Art/Spritesheets/farmer.png" id="1_5wneu"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/player.gd" id="1_v2qtl"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://d146874hcn0he" path="res://Sound/SFX/Steps/step_4.ogg" id="6_xp8sd"]
 [ext_resource type="Script" path="res://Scenes/Characters/Player/States/attacking.gd" id="7_enpal"]
 [ext_resource type="AudioStream" uid="uid://ccd1hr8viuqvn" path="res://Sound/SFX/Steps/step_5.ogg" id="7_j3e06"]
+[ext_resource type="Script" path="res://Scenes/Characters/Player/audio_player.gd" id="8_04pwo"]
 [ext_resource type="AudioStream" uid="uid://ddouynsn6fkbx" path="res://Sound/SFX/Steps/step_6.ogg" id="8_k603k"]
 [ext_resource type="AudioStream" uid="uid://byivw4p1tc6wl" path="res://Sound/SFX/Steps/step_1.ogg" id="9_8vf3t"]
 [ext_resource type="AudioStream" uid="uid://bi31riw7oc0ef" path="res://Sound/SFX/Planting/Külvamine1.wav" id="10_trn76"]
@@ -18,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://dfmbb2caaxapl" path="res://Sound/SFX/Planting/Külvamine3.wav" id="12_hql53"]
 [ext_resource type="AudioStream" uid="uid://77ymac6jxua3" path="res://Sound/SFX/Planting/Korjamine(harvesting)1.wav" id="13_fllan"]
 [ext_resource type="AudioStream" uid="uid://b7vxtt0t3wovu" path="res://Sound/SFX/Kick1.wav" id="14_b8ynp"]
+[ext_resource type="AudioStream" uid="uid://4vkckfy37xrl" path="res://Sound/SFX/Buying.wav" id="20_45umk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m3s0a"]
 size = Vector2(9, 9)
@@ -63,7 +65,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Audio/Steps:playing")
+tracks/3/path = NodePath("Sprite/Weapon/Boot:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -75,58 +77,34 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Audio/Kicking:playing")
+tracks/4/path = NodePath("Sprite/Weapon/Boot:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [1.30469]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite/Weapon/Boot:visible")
+tracks/5/path = NodePath("Sprite/Weapon/Boot:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Sprite/Weapon/Boot:rotation")
+tracks/6/path = NodePath("Sprite/Weapon/Boot:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.30469]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Sprite/Weapon/Boot:scale")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Sprite/Weapon/Boot:position")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -220,62 +198,64 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Audio/Kicking:playing")
+tracks/3/path = NodePath("Sprite/Weapon/Boot:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite/Weapon/Boot:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite/Weapon/Boot:rotation")
-tracks/5/interp = 2
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite/Weapon/Boot:rotation")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.4, 0.45),
 "transitions": PackedFloat32Array(0.353554, 2.92817, 1, 1),
 "update": 0,
 "values": [0.0, 1.13524, -1.41871, -1.20043]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Sprite/Weapon/Boot:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite/Weapon/Boot:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.45, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(1e-05, 1e-05), Vector2(1.5, 1.5), Vector2(1.5, 1.5), Vector2(1e-05, 1e-05)]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Sprite/Weapon/Boot:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite/Weapon/Boot:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.15, 0.25, 0.4),
 "transitions": PackedFloat32Array(0.353554, 2.92817, 1, 1),
 "update": 0,
 "values": [Vector2(17, 6), Vector2(-9, 9), Vector2(0.6, 11), Vector2(15, 4)]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AudioPlayer")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["kick"],
+"method": &"play"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_3ope6"]
@@ -319,17 +299,22 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
-tracks/3/type = "value"
+tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Audio/Steps:playing")
+tracks/3/path = NodePath("AudioPlayer")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, true]
+"values": [{
+"args": ["step"],
+"method": &"play"
+}, {
+"args": ["step"],
+"method": &"play"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3rmo8"]
@@ -406,20 +391,27 @@ idle = NodePath("../idle")
 script = ExtResource("7_enpal")
 idle = NodePath("../idle")
 
-[node name="Audio" type="Node" parent="."]
+[node name="AudioPlayer" type="Node" parent="."]
+script = ExtResource("8_04pwo")
 
-[node name="Steps" type="AudioStreamPlayer" parent="Audio"]
+[node name="step" type="AudioStreamPlayer" parent="AudioPlayer"]
 stream = SubResource("AudioStreamRandomizer_bvxb7")
 volume_db = 10.306
 pitch_scale = 2.04
 bus = &"Stepping"
 
-[node name="Planting" type="AudioStreamPlayer" parent="Audio"]
+[node name="plant" type="AudioStreamPlayer" parent="AudioPlayer"]
 stream = SubResource("AudioStreamRandomizer_dsyhp")
 bus = &"Planting"
 
-[node name="Harvesting" type="AudioStreamPlayer" parent="Audio"]
+[node name="harvest" type="AudioStreamPlayer" parent="AudioPlayer"]
 stream = ExtResource("13_fllan")
+bus = &"Harvesting"
 
-[node name="Kicking" type="AudioStreamPlayer" parent="Audio"]
+[node name="kick" type="AudioStreamPlayer" parent="AudioPlayer"]
 stream = ExtResource("14_b8ynp")
+bus = &"kick"
+
+[node name="buy" type="AudioStreamPlayer" parent="AudioPlayer"]
+stream = ExtResource("20_45umk")
+bus = &"buy"

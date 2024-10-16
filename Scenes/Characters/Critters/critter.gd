@@ -16,6 +16,9 @@ var _attack_speed : float = 2
 ).call()
 
 @onready var anim : AnimationPlayer = $AnimationPlayer
+@onready var audio_player : Node = $AudioPlayer
+
+var left : bool = false
 
 #FIXME: tweening is bad if we want to kick them away before they reach the crop
 @onready var entry_tween : Tween = (
@@ -34,9 +37,14 @@ var _attack_speed : float = 2
 func _ready() -> void:
 	entry_tween.play()
 	$Sprite2D.frame = randi_range(0, 9)
+	audio_player.play("screech")
 
 #TODO: Create check to cancel tween in the case plant gets harvested before reaching it
 func _process(_delta: float) -> void:
+	if left:
+		move_and_slide()
+		return
+	
 	if _crop == null or not is_instance_valid(_crop):
 		_leave()
 	elif _crop.rotted:
@@ -54,9 +62,13 @@ func _arrival() -> void:
 	add_child(_attack_timer)
 
 #TODO: Creature leave function
+#TODO: free creatures after a few moments
 func _leave() -> void:
+	audio_player.play("fly")
 	_stop_attacking()
 	take_damage(Vector2.RIGHT)
+	cell._remove()
+	left = true
 
 #TODO: Creature attack
 func _attack() -> void:
@@ -71,6 +83,7 @@ func _handle_attack() -> void:
 func take_damage(dir: Vector2) -> void:
 	_stop_attacking()
 	velocity = dir * 300
+	left = true
 
 #TODO: Re-check this script, this function is called like 3 times for some reason
 # Prolly bc of the half-baked solution atm

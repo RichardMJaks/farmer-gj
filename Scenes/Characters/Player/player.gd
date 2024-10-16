@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var speed : float
 @export var acceleration_time : float
 
+@onready var audio_player : Node = $AudioPlayer
 @onready var state_machine : Node = $StateMachine
 @onready var sprite_marker : Marker2D = $Sprite
 
@@ -14,10 +15,9 @@ var _crop : Crop
 # IndicatorTML will set it itself
 var indicator_tml : TileMapLayer = null
 
-@onready var targeted_cell : Cell = null
+var targeted_cell : Cell = null
 
 @onready var boot : Sprite2D = $Sprite/Weapon/Boot
-var facing_dir : float = 1
 
 func _ready() -> void:
 	if not indicator_tml:
@@ -41,11 +41,9 @@ func _handle_movement() -> void:
 	var v_dir : float = Input.get_axis("m_up", "m_down")
 	
 	if h_dir < 0:
-		facing_dir = -1
+		sprite_marker.scale.x = -1
 	if h_dir > 0:
-		facing_dir = 1
-	
-	sprite_marker.scale.x = facing_dir
+		sprite_marker.scale.x = 1
 	
 	var dir_vec : Vector2 = Vector2(h_dir, v_dir).normalized()
 	
@@ -57,7 +55,11 @@ func _handle_movement() -> void:
 #region Indicator handling
 func _handle_indicator() -> Cell:
 	if not indicator_tml:
-		return
+		return null
+	
+	# Gate it so no other interaction would be possible while attacking
+	if state_machine.current_state.name == "attacking":
+		return targeted_cell
 	
 	var tile_location : Vector2i = indicator_tml.local_to_map(position)
 	var cell : Cell = indicator_tml.get_cell(tile_location)		
@@ -106,8 +108,9 @@ func _context_critter() -> void:
 	state_machine.force_state_change("attacking")
 
 func _ch_hit() -> void:
+	# This whole thing is simply to have something more than just them going away
 	var dir = boot.transform.x
-	dir.x *= facing_dir
+	dir.x *= sprite_marker.scale.x
 	dir.y *= -1
 	targeted_cell.hit_critter(dir)	
 
@@ -120,6 +123,7 @@ func _context_shop() -> void:
 	
 	_add_crop(crop)
 	_crop.position = crop_position
+	audio_player.play("buy")
 	
 	
 #TODO: Sell flair
@@ -129,6 +133,7 @@ func _context_sell() -> void:
 
 func _context_crop() -> void:
 	targeted_cell.harvest()
+	audio_player.play("harvest")
 
 
 #TODO: Sprite change to regular when planted
@@ -139,6 +144,7 @@ func _context_soil() -> void:
 	
 	remove_child(_crop)
 	targeted_cell.plant(_crop)
+	audio_player.play("plant")
 	_crop = null
 #endregion	
 
