@@ -15,7 +15,6 @@ func enter() -> void:
 
 
 func _finish() -> void:
-	print(state_changed.get_connections())
 	state_changed.emit(self, idle)
 	anim.animation_finished.disconnect(_finish)
 

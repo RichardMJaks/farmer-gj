@@ -10,7 +10,6 @@ var cell : CritterCell
 var ps_target_line : PackedScene = preload("res://Scenes/Characters/Critters/target_line.tscn")
 
 func _ready() -> void:
-	print(audio_player)
 	$Sprite2D.frame = randi_range(0, 9)
 
 func _process(delta: float) -> void:

@@ -1,8 +1,88 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxp4kuxpl2mmx"]
+[gd_scene load_steps=13 format=3 uid="uid://cxp4kuxpl2mmx"]
 
 [ext_resource type="Script" path="res://Scenes/Crop/crop.gd" id="1_4763i"]
 [ext_resource type="Texture2D" uid="uid://d6bbrms44s1o" path="res://Art/Spritesheets/crops.png" id="2_ov3sx"]
 [ext_resource type="Texture2D" uid="uid://c3gnsf1a54a0s" path="res://Art/Spritesheets/Icons.png" id="3_buism"]
+[ext_resource type="Script" path="res://Scenes/Crop/indicator_handler.gd" id="4_mnr2x"]
+[ext_resource type="Script" path="res://Scenes/Crop/Indicators/time.gd" id="5_abq0r"]
+[ext_resource type="Script" path="res://Scenes/Crop/Indicators/attacked.gd" id="6_vbesx"]
+
+[sub_resource type="Animation" id="Animation_4qr66"]
+resource_name = "indicate"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1p87d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5peet"]
+_data = {
+"RESET": SubResource("Animation_1p87d"),
+"indicate": SubResource("Animation_4qr66")
+}
+
+[sub_resource type="Animation" id="Animation_q7h2i"]
+resource_name = "indicate"
+length = 0.3
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -2), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7rltr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lo57c"]
+_data = {
+"RESET": SubResource("Animation_7rltr"),
+"indicate": SubResource("Animation_q7h2i")
+}
 
 [node name="Crop" type="Node2D"]
 script = ExtResource("1_4763i")
@@ -29,5 +109,36 @@ offset_bottom = -6.0
 text = "0"
 
 [node name="StageTimer" type="Timer" parent="."]
+
+[node name="Indicator" type="Node2D" parent="."]
+position = Vector2(0, -16)
+script = ExtResource("4_mnr2x")
+
+[node name="time" type="Sprite2D" parent="Indicator"]
+texture = ExtResource("3_buism")
+hframes = 3
+vframes = 4
+frame = 9
+script = ExtResource("5_abq0r")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Indicator/time"]
+libraries = {
+"": SubResource("AnimationLibrary_5peet")
+}
+autoplay = "indicate"
+
+[node name="attacked" type="Sprite2D" parent="Indicator"]
+visible = false
+texture = ExtResource("3_buism")
+hframes = 3
+vframes = 4
+frame = 7
+script = ExtResource("6_vbesx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Indicator/attacked"]
+libraries = {
+"": SubResource("AnimationLibrary_lo57c")
+}
+autoplay = "indicate"
 
 [connection signal="timeout" from="StageTimer" to="." method="_on_stage_timer_timeout"]

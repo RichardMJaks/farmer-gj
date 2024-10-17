@@ -7,10 +7,12 @@ extends Node2D
 @onready var buy_carry_sprite : Sprite2D = $BuyCarrySprite
 
 @onready var price_tag : Label = $BuyCarrySprite/PriceTag
+@onready var indicator_handler : Node2D = $Indicator
 
 var _cell : CropCell 
 
 # Planted variables
+var attacked : bool = false
 @export var _start_frame = 0
 var harvestable : bool = false
 var _stage : int = 0
@@ -41,9 +43,12 @@ enum STATE {
 func _ready() -> void:
 	price_tag.text = str(price)
 	_update_state_appearance()
+	$Indicator/time.timer = stage_timer
 
 func _process(_delta: float) -> void:
 	planted_sprite.frame = _start_frame + _stage
+	if state == STATE.PLANTED and _stage == 2 and not attacked:
+		indicator_handler.change_indicator("time")
 
 #TODO: Harvest flair
 func harvest() -> int:
@@ -91,9 +96,11 @@ func _set_state_planted() -> void:
 func _on_stage_timer_timeout() -> void:
 	if _stage == 2:
 		rot()
+		return
+		
 	_grow()
 	#TODO: Maybe make ripe phase last longer than growth?
-	# if _stage == 3:
+	# if _stage == 2:
 	#	 set_some_var_to_true
 	#	loop stage_timer once more to lengthen, this time showing timer indicators
 	
@@ -111,6 +118,7 @@ func rot() -> void:
 	harvestable = true
 	_cell.rotted = true
 	stage_timer.stop()
+	indicator_handler.change_indicator("stop")
 
 func _to_string() -> String:
 	return crop_name

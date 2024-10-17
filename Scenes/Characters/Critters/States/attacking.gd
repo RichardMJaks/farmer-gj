@@ -38,6 +38,8 @@ func enter() -> void:
 		return
 	GM.critter_etml.attack_crop(char, char._crop)
 	add_child(_attack_timer)
+	char._crop.get_crop().indicator_handler.change_indicator("attacked")
+	char._crop.get_crop().attacked = true
 
 func exit() -> void:
 	if _attack_timer == null or not is_instance_valid(_attack_timer):
@@ -47,6 +49,8 @@ func exit() -> void:
 	if _attack_timer.get_parent():
 		remove_child(_attack_timer)
 	_attack_timer.queue_free()
+	char._crop.get_crop().attacked = false
+	char._crop.get_crop().indicator_handler.change_indicator("stop")
 
 func update(_delta: float) -> void:
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://b1q8r4qmgx3xy"]
+[gd_scene load_steps=5 format=4 uid="uid://bccywd22vlc3x"]
 
 [ext_resource type="Texture2D" uid="uid://cxrrwihpgrudl" path="res://Art/Tilemaps/environment.png" id="1_pcfh7"]
 [ext_resource type="Texture2D" uid="uid://0dptjoslh7nb" path="res://Art/Spritesheets/farmer.png" id="2_cqogx"]
